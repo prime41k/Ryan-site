@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>rayan41k — personal site</title>
+<meta name="description" content="rayan41k — personal intro site: python, servers, linux, curiosity. RU/EN.">
+<meta property="og:title" content="rayan41k — personal site">
+<meta property="og:description" content="python · servers · linux · curiosity — RU/EN">
+<meta name="theme-color" content="#0b0f0d">
+<style>
+:root{--bg:#0b0f0d;--card:#111714;--line:rgba(255,255,255,.09);--txt:#eef2ee;--mut:#8fa39a;--green:#b6ff3c;--mint:#9ff0c8;--pink:#f2b8cf;--red:#ff6b6b;--r:18px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+ radial-gradient(640px 320px at 85% -5%,rgba(182,255,60,.09),transparent 70%),
+ radial-gradient(520px 320px at -5% 105%,rgba(159,240,200,.07),transparent 70%),
+ repeating-linear-gradient(0deg,transparent 0 31px,rgba(255,255,255,.022) 31px 32px),
+ repeating-linear-gradient(90deg,transparent 0 31px,rgba(255,255,255,.022) 31px 32px)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* nav */
+.topnav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(11,15,13,.75);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.navrow{display:flex;align-items:center;gap:18px;height:58px}
+.logo{color:var(--txt);text-decoration:none;font-weight:700;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px}
+.caret{color:var(--green);animation:blink 1.1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.topnav nav{display:flex;gap:16px;margin-left:auto;flex-wrap:wrap}
+.topnav nav a{color:var(--mut);text-decoration:none;font-size:13.5px;transition:color .2s}
+.topnav nav a:hover{color:var(--green)}
+.lang{margin-left:6px;background:none;border:1px solid var(--line);color:var(--txt);border-radius:999px;padding:5px 13px;cursor:pointer;font-size:12.5px;transition:.2s;font-family:inherit}
+.lang:hover{border-color:var(--green);color:var(--green)}
+
+/* hero */
+main{padding-top:58px}
+.hero{min-height:calc(100vh - 58px);display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:20px}
+.hi{color:var(--mint);font-size:15px;letter-spacing:.06em}
+.hero h1{font-size:clamp(44px,7vw,76px);line-height:1.05;font-family:ui-monospace,Menlo,Consolas,monospace;margin:6px 0 10px}
+.meta{color:var(--mut);font-size:14.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#ageGlitch{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--green);display:inline-block;min-width:3ch;text-align:center;font-weight:700}
+#ageGlitch.freeze{color:#fff;text-shadow:2px 0 var(--pink),-2px 0 var(--green);animation:glitchy .3s steps(2) infinite}
+@keyframes glitchy{50%{transform:translateX(1.5px) skewX(4deg)}}
+.status{margin:14px 0 26px;font-size:17px;max-width:46ch;opacity:.92}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;text-decoration:none;font-size:14.5px;font-weight:600;cursor:pointer;border:1px solid transparent;transition:.2s;font-family:inherit}
+.btn.primary{background:var(--green);color:#0b0f0d}
+.btn.primary:hover{box-shadow:0 0 26px rgba(182,255,60,.45);transform:translateY(-1px)}
+.btn.ghost{border-color:var(--line);color:var(--txt);background:none}
+.btn.ghost:hover{border-color:var(--green);color:var(--green)}
+.hero-shape{display:flex;justify-content:center}
+.hero-shape svg{width:min(420px,80vw);height:auto;filter:drop-shadow(0 0 30px rgba(182,255,60,.28))}
+#morphRot{transform-box:view-box;transform-origin:center;animation:spin 26s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* sections */
+section.block{padding:84px 0 10px;scroll-margin-top:70px}
+h2{font-size:clamp(26px,4vw,38px);margin-bottom:6px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.lead{color:var(--mut);margin-bottom:30px;max-width:60ch}
+
+/* about */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;transition:.25s}
+.card:hover{transform:translateY(-3px);border-color:rgba(182,255,60,.4)}
+.card h3{font-size:16.5px;margin-bottom:8px}
+.card p{color:var(--mut);font-size:13.8px}
+.card .ico{font-size:22px;margin-bottom:10px;display:inline-block}
+
+/* playground */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.panel h3{font-size:18px;margin-bottom:4px}
+.panel .plead{color:var(--mut);font-size:13.5px;margin-bottom:16px}
+#dragSvg{width:100%;height:auto;touch-action:none;user-select:none;border-radius:12px;background:rgba(255,255,255,.02)}
+#dragSvg text{pointer-events:none}
+.v{cursor:grab;touch-action:none}
+.v:active{cursor:grabbing}
+.readouts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:12.5px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--mut);background:rgba(255,255,255,.02)}
+button.chip{cursor:pointer;transition:.2s}
+button.chip:hover{border-color:var(--green);color:var(--green)}
+.chip b{color:var(--txt);font-weight:600}
+.c0{color:var(--green)!important}.c1{color:var(--mint)!important}.c2{color:var(--pink)!important}
+.wave-box{border-radius:12px;background:rgba(255,255,255,.02);padding:4px}
+#waveCanvas{display:block}
+.sliders{display:grid;gap:12px;margin-top:16px}
+.sl{display:grid;grid-template-columns:110px 1fr 44px;align-items:center;gap:10px;font-size:13px;color:var(--mut)}
+.sl input{accent-color:var(--green);width:100%}
+.sl .val{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--txt);text-align:right;font-size:12.5px}
+.eq{margin-top:12px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--mint);font-size:13px}
+
+/* quiz */
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-bottom:14px;transition:border-color .3s}
+.qcard h3{font-size:16px;margin-bottom:12px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:10px 14px;font-size:13.5px;cursor:pointer;text-align:left;transition:.2s;font-family:inherit}
+.opt:hover{border-color:rgba(182,255,60,.5)}
+.opt.is-correct{border-color:var(--green);color:var(--green);background:rgba(182,255,60,.09);opacity:1!important}
+.opt.is-wrong{border-color:var(--red);color:var(--red);background:rgba(255,107,107,.08);opacity:1!important}
+.qcard.locked .opt{opacity:.45;pointer-events:none}
+@keyframes pulseGood{0%{box-shadow:0 0 0 0 rgba(182,255,60,.55)}70%{box-shadow:0 0 0 16px rgba(182,255,60,0)}100%{box-shadow:0 0 0 0 rgba(182,255,60,0)}}
+@keyframes pulseBad{0%{box-shadow:0 0 0 0 rgba(255,107,107,.55)}70%{box-shadow:0 0 0 16px rgba(255,107,107,0)}100%{box-shadow:0 0 0 0 rgba(255,107,107,0)}}
+.pulse-good{animation:pulseGood .8s ease-out 2;border-color:var(--green)!important}
+.pulse-bad{animation:pulseBad .8s ease-out 2;border-color:var(--red)!important}
+.scoreline{display:flex;gap:14px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+#quizScore{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--green);font-size:14px}
+#quizDone{color:var(--mint);font-size:14px}
+
+/* path */
+.dots{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--green);letter-spacing:6px;font-size:14px;margin-bottom:14px}
+#pathList{display:grid;gap:12px;margin-bottom:18px}
+.step{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;opacity:0;transform:translateY(10px);transition:.5s ease}
+.step.show{opacity:1;transform:none}
+.step-num{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--green);font-size:15px;font-weight:700}
+.step h4{font-size:15.5px;margin-bottom:3px}
+.step p{color:var(--mut);font-size:13.5px}
+.pathbtns{display:flex;gap:10px}
+.btn.small{padding:9px 18px;font-size:13px}
+.btn.small:disabled{opacity:.5;cursor:default;box-shadow:none;transform:none}
+
+/* contact */
+.contact-grid{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.soon{border:1px dashed rgba(242,184,207,.5);color:var(--pink);border-radius:999px;padding:9px 16px;font-size:13px}
+
+footer{margin-top:90px;border-top:1px solid var(--line);padding:26px 0 34px;color:var(--mut);font-size:13px;text-align:center}
+
+@media(max-width:900px){
+ .cards{grid-template-columns:repeat(2,1fr)}
+ .hero{grid-template-columns:1fr;padding-top:30px}
+ .hero-shape{order:-1}
+ .hero-shape svg{width:min(300px,70vw)}
+ .grid2{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+ .cards{grid-template-columns:1fr}
+ .opts{grid-template-columns:1fr}
+ .topnav nav{display:none}
+ .sl{grid-template-columns:96px 1fr 40px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="wrap navrow">
+    <a class="logo" href="#top">rayan41k<span class="caret">_</span></a>
+    <nav>
+      <a href="#about" data-i18n="nav_about">обо мне</a>
+      <a href="#playground" data-i18n="nav_play">плейграунд</a>
+      <a href="#quiz" data-i18n="nav_quiz">квиз</a>
+      <a href="#path" data-i18n="nav_path">путь</a>
+      <a href="#contact" data-i18n="nav_contact">контакты</a>
+    </nav>
+    <button id="langBtn" class="lang">EN</button>
+  </div>
+</header>
+
+<main>
+  <!-- ================= HERO ================= -->
+  <section class="hero wrap" id="top">
+    <div class="hero-text">
+      <p class="hi" data-i18n="hero_hi">привет, я</p>
+      <h1>rayan41k<span class="caret">_</span></h1>
+      <div class="meta">
+        <span data-i18n="age_label">возраст:</span>
+        <span id="ageGlitch" title="age.exe has stopped working">??</span>
+        <span>·</span>
+        <span data-i18n="hero_from">из Франции</span>
+        <span>🇫🇷</span>
+      </div>
+      <p class="status" data-i18n="hero_status">«каждый день узнаю что-то новое»</p>
+      <div class="cta">
+        <a class="btn primary" href="https://t.me/traxx05" target="_blank" rel="noopener"><span data-i18n="btn_tg">написать в Telegram</span> ↗</a>
+        <a class="btn ghost" href="#playground"><span data-i18n="btn_play">плейграунд ↓</span></a>
+      </div>
+    </div>
+    <div class="hero-shape">
+      <svg id="morphSvg" viewBox="0 0 420 420" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#b6ff3c"/>
+            <stop offset="1" stop-color="#7be0a3"/>
+          </linearGradient>
+        </defs>
+        <g id="morphRot">
+          <path id="blobOuter" fill="rgba(182,255,60,0.05)" stroke="url(#g1)" stroke-width="2.5"/>
+          <path id="blobInner" fill="none" stroke="#f2b8cf" stroke-width="1.5" opacity="0.55"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="block wrap" id="about">
+    <h2 data-i18n="about_title">обо мне</h2>
+    <p class="lead" data-i18n="about_lead">пара слов о том, что меня заводит</p>
+    <div class="cards">
+      <div class="card"><span class="ico">🐍</span><h3 data-i18n="c1t">Python и структуры языков</h3><p data-i18n="c1d">разбираюсь, как устроены языки программирования, и пишу код на Python</p></div>
+      <div class="card"><span class="ico">🌐</span><h3 data-i18n="c2t">как работает интернет</h3><p data-i18n="c2d">серверы, протоколы, сети — хочу понять всё изнутри</p></div>
+      <div class="card"><span class="ico">🐧</span><h3 data-i18n="c3t">Linux</h3><p data-i18n="c3d">копаюсь в системе, терминале и автоматизации</p></div>
+      <div class="card"><span class="ico">⚡</span><h3 data-i18n="c4t">техника — моя стихия</h3><p data-i18n="c4d">всё, что связано с технологиями, изучаю с большим интересом</p></div>
+    </div>
+  </section>
+
+  <!-- ================= PLAYGROUND ================= -->
+  <section class="block wrap" id="playground">
+    <h2 data-i18n="play_title">плейграунд</h2>
+    <p class="lead" data-i18n="play_lead">немного интерактива: потаскай вершины треугольника и покрути волну слайдерами</p>
+    <div class="grid2">
+      <div class="panel">
+        <h3 data-i18n="drag_title">живые вершины</h3>
+        <p class="plead" data-i18n="drag_lead">тяни точки — координаты, площадь и периметр считаются на лету</p>
+        <svg id="dragSvg" viewBox="0 0 360 260">
+          <defs>
+            <pattern id="gpat" width="24" height="24" patternUnits="userSpaceOnUse">
+              <path d="M24 0H0V24" fill="none" stroke="rgba(255,255,255,0.05)"/>
+            </pattern>
+          </defs>
+          <rect width="360" height="260" fill="url(#gpat)"/>
+          <line class="tri" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+          <line class="tri" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+          <line class="tri" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+          <text id="dragHint" x="180" y="250" text-anchor="middle" fill="rgba(255,255,255,.35)" font-size="11" data-i18n="ro_hint">← тяни меня</text>
+          <text class="vl" font-size="12" font-family="monospace">A</text>
+          <text class="vl" font-size="12" font-family="monospace">B</text>
+          <text class="vl" font-size="12" font-family="monospace">C</text>
+          <circle class="v" r="11" stroke="#0b0f0d" stroke-width="3"/>
+          <circle class="v" r="11" stroke="#0b0f0d" stroke-width="3"/>
+          <circle class="v" r="11" stroke="#0b0f0d" stroke-width="3"/>
+        </svg>
+        <div class="readouts">
+          <span class="chip"><b class="c0" id="roA">A</b></span>
+          <span class="chip"><b class="c1" id="roB">B</b></span>
+          <span class="chip"><b class="c2" id="roC">C</b></span>
+          <span class="chip"><span data-i18n="ro_area">площадь</span>: <b id="roArea"></b></span>
+          <span class="chip"><span data-i18n="ro_perim">периметр</span>: <b id="roPerim"></b></span>
+        </div>
+      </div>
+      <div class="panel">
+        <h3 data-i18n="wave_title">волна на слайдерах</h3>
+        <p class="plead" data-i18n="wave_lead">y = A·sin(f·x + t·v) — двигай слайдеры и смотри, что меняется</p>
+        <div class="wave-box"><canvas id="waveCanvas" height="220"></canvas></div>
+        <div class="sliders">
+          <label class="sl"><span data-i18n="s_amp">амплитуда A</span><input id="sAmp" type="range" min="5" max="90" value="42"><span class="val" id="vAmp">42</span></label>
+          <label class="sl"><span data-i18n="s_freq">частота f</span><input id="sFreq" type="range" min="1" max="10" value="3"><span class="val" id="vFreq">3</span></label>
+          <label class="sl"><span data-i18n="s_speed">скорость v</span><input id="sSpd" type="range" min="0" max="3" step="0.1" value="1"><span class="val" id="vSpd">1.0</span></label>
+        </div>
+        <p class="eq" id="waveEq"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="block wrap" id="quiz">
+    <h2 data-i18n="quiz_title">насколько ты меня знаешь?</h2>
+    <p class="lead" data-i18n="quiz_lead">4 вопроса — отвечай, и карточка вспыхнет зелёным или красным</p>
+    <div class="scoreline">
+      <span id="quizScore"></span>
+      <span id="quizDone" hidden data-i18n="quiz_done">квиз пройден 🎉</span>
+    </div>
+    <div id="quizCards"></div>
+  </section>
+
+  <!-- ================= PATH ================= -->
+  <section class="block wrap" id="path">
+    <h2 data-i18n="path_title">мой путь</h2>
+    <p class="lead" data-i18n="path_lead">раскрывай шаг за шагом ↓</p>
+    <div class="dots" id="pathDots"></div>
+    <div id="pathList"></div>
+    <div class="pathbtns">
+      <button id="pathBtn" class="btn primary small"></button>
+      <button id="pathReset" class="btn ghost small"></button>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="block wrap" id="contact">
+    <h2 data-i18n="contact_title">контакты</h2>
+    <p class="lead" data-i18n="contact_lead">напиши мне — отвечу</p>
+    <div class="contact-grid">
+      <a class="btn primary" href="https://t.me/traxx05" target="_blank" rel="noopener"><span data-i18n="contact_tg">Telegram · @traxx05</span> ↗</a>
+      <a class="btn ghost" href="https://github.com/prime41k" target="_blank" rel="noopener"><span data-i18n="contact_gh">GitHub</span> ↗</a>
+      <button class="chip" id="copyTg" data-i18n="copy">скопировать ник</button>
+      <span class="soon" data-i18n="contact_soon">телеграм-канал — coming soon</span>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span data-i18n="footer">сделано с ♥ и любопытством · rayan41k</span></div></footer>
+
+<script>
+(() => {
+"use strict";
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+/* ================= i18n ================= */
+const DICT = {
+ru:{
+ nav_about:"обо мне",nav_play:"плейграунд",nav_quiz:"квиз",nav_path:"путь",nav_contact:"контакты",
+ hero_hi:"привет, я",hero_from:"из Франции",age_label:"возраст:",
+ hero_status:"«каждый день узнаю что-то новое»",
+ btn_tg:"написать в Telegram",btn_play:"плейграунд ↓",
+ about_title:"обо мне",about_lead:"пара слов о том, что меня заводит",
+ c1t:"Python и структуры языков",c1d:"разбираюсь, как устроены языки программирования, и пишу код на Python",
+ c2t:"как работает интернет",c2d:"серверы, протоколы, сети — хочу понять всё изнутри",
+ c3t:"Linux",c3d:"копаюсь в системе, терминале и автоматизации",
+ c4t:"техника — моя стихия",c4d:"всё, что связано с технологиями, изучаю с большим интересом",
+ play_title:"плейграунд",play_lead:"немного интерактива: потаскай вершины треугольника и покрути волну слайдерами",
+ drag_title:"живые вершины",drag_lead:"тяни точки — координаты, площадь и периметр считаются на лету",
+ ro_hint:"← тяни меня",ro_area:"площадь",ro_perim:"периметр",ro_px2:"px²",ro_px:"px",
+ wave_title:"волна на слайдерах",wave_lead:"y = A·sin(f·x + t·v) — двигай слайдеры и смотри, что меняется",
+ s_amp:"амплитуда A",s_freq:"частота f",s_speed:"скорость v",
+ quiz_title:"насколько ты меня знаешь?",quiz_lead:"4 вопроса — отвечай, и карточка вспыхнет зелёным или красным",
+ quiz_score:"счёт",quiz_done:"квиз пройден 🎉",
+ quiz_qs:[
+  {q:"где я живу?",opts:["в Германии","во Франции","в России","в Бразилии"],a:1},
+  {q:"что я сейчас активно изучаю?",opts:["кулинарию","Python, серверы и Linux","балет","астрологию"],a:1},
+  {q:"как меня найти в Telegram?",opts:["@traxx05","@rayan_main","@rayan41k_official","нигде"],a:0},
+  {q:"что я люблю больше всего?",opts:["смотреть в стену","учиться чему-то новому","собирать наклейки","ждать понедельник"],a:1}
+ ],
+ path_title:"мой путь",path_lead:"раскрывай шаг за шагом ↓",
+ path_next:"раскрыть следующий шаг",path_done:"всё раскрыто ✓",path_reset:"↺ сбросить",
+ path_steps:[
+  {t:"искра",d:"загорелся техникой — хотелось понять, как всё это работает"},
+  {t:"python",d:"начал изучать Python и разбираться в структурах языков"},
+  {t:"интернет",d:"пошёл глубже: серверы, сети, протоколы — как устроен интернет изнутри"},
+  {t:"linux",d:"осваиваю Linux: терминал, система, автоматизация"},
+  {t:"что дальше",d:"свои проекты и, возможно, телеграм-канал — coming soon…"}
+ ],
+ contact_title:"контакты",contact_lead:"напиши мне — отвечу",
+ contact_tg:"Telegram · @traxx05",contact_gh:"GitHub",
+ contact_soon:"телеграм-канал — coming soon",
+ copy:"скопировать ник",copied:"скопировано ✓",
+ footer:"сделано с ♥ и любопытством · rayan41k"
+},
+en:{
+ nav_about:"about",nav_play:"playground",nav_quiz:"quiz",nav_path:"path",nav_contact:"contact",
+ hero_hi:"hey, i'm",hero_from:"from France",age_label:"age:",
+ hero_status:"\u201clearning something new every day\u201d",
+ btn_tg:"message me on Telegram",btn_play:"playground \u2193",
+ about_title:"about me",about_lead:"a few words about what drives me",
+ c1t:"Python & language structures",c1d:"digging into how programming languages work and writing Python code",
+ c2t:"how the internet works",c2d:"servers, protocols, networks \u2014 I want to understand it all from the inside",
+ c3t:"Linux",c3d:"exploring the system, the terminal and automation",
+ c4t:"tech is my element",c4d:"anything related to technology, I study with big interest",
+ play_title:"playground",play_lead:"a bit of interactivity: drag the triangle vertices, spin the wave with sliders",
+ drag_title:"live vertices",drag_lead:"drag the points \u2014 coordinates, area and perimeter are computed live",
+ ro_hint:"\u2190 drag me",ro_area:"area",ro_perim:"perimeter",ro_px2:"px\u00b2",ro_px:"px",
+ wave_title:"slider wave",wave_lead:"y = A\u00b7sin(f\u00b7x + t\u00b7v) \u2014 move the sliders and watch it change",
+ s_amp:"amplitude A",s_freq:"frequency f",s_speed:"speed v",
+ quiz_title:"how well do you know me?",quiz_lead:"4 questions \u2014 the card flashes green or red on your answer",
+ quiz_score:"score",quiz_done:"quiz complete \ud83c\udf89",
+ quiz_qs:[
+  {q:"where do I live?",opts:["Germany","France","Russia","Brazil"],a:1},
+  {q:"what am I actively learning right now?",opts:["cooking","Python, servers & Linux","ballet","astrology"],a:1},
+  {q:"where can you find me on Telegram?",opts:["@traxx05","@rayan_main","@rayan41k_official","nowhere"],a:0},
+  {q:"what do I love the most?",opts:["staring at a wall","learning new things","collecting stickers","waiting for Monday"],a:1}
+ ],
+ path_title:"my path",path_lead:"reveal it step by step \u2193",
+ path_next:"reveal next step",path_done:"all revealed \u2713",path_reset:"\u21ba reset",
+ path_steps:[
+  {t:"spark",d:"got hooked on tech and wanted to understand how everything works"},
+  {t:"python",d:"started learning Python and digging into language structures"},
+  {t:"internet",d:"went deeper: servers, networks, protocols \u2014 the internet from the inside"},
+  {t:"linux",d:"getting into Linux: terminal, the system, automation"},
+  {t:"what's next",d:"own projects and maybe a Telegram channel \u2014 coming soon\u2026"}
+ ],
+ contact_title:"contact",contact_lead:"write to me \u2014 I'll answer",
+ contact_tg:"Telegram \u00b7 @traxx05",contact_gh:"GitHub",
+ contact_soon:"telegram channel \u2014 coming soon",
+ copy:"copy handle",copied:"copied \u2713",
+ footer:"made with \u2665 and curiosity \u00b7 rayan41k"
+}};
+
+let lang = 'ru';
+try{ lang = localStorage.getItem('rayan-lang') || 'ru'; }catch(e){}
+if(!DICT[lang]) lang='ru';
+const t = k => (DICT[lang] && DICT[lang][k]) ?? DICT.en[k] ?? k;
+
+function applyLang(){
+  document.documentElement.lang = lang;
+  $$('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+  $('#langBtn').textContent = lang==='ru' ? 'EN' : 'RU';
+  renderQuiz(); renderPath();
+}
+$('#langBtn').addEventListener('click',()=>{
+  lang = lang==='ru' ? 'en' : 'ru';
+  try{ localStorage.setItem('rayan-lang',lang); }catch(e){}
+  applyLang();
+});
+
+/* ================= hero morphing blob ================= */
+const blobOuter=$('#blobOuter'), blobInner=$('#blobInner');
+const N=12, CX=210, CY=210;
+const phases=Array.from({length:N},(_,i)=>i*(Math.PI*2/N));
+const pA=Array.from({length:N},()=>({x:0,y:0}));
+const pB=Array.from({length:N},()=>({x:0,y:0}));
+function smoothPath(pts){
+  const n=pts.length, mid=(a,b)=>({x:(a.x+b.x)/2,y:(a.y+b.y)/2});
+  const m0=mid(pts[0],pts[1]);
+  let d=`M ${m0.x.toFixed(1)} ${m0.y.toFixed(1)}`;
+  for(let i=1;i<=n;i++){
+    const p=pts[i%n], m=mid(p,pts[(i+1)%n]);
+    d+=` Q ${p.x.toFixed(1)} ${p.y.toFixed(1)} ${m.x.toFixed(1)} ${m.y.toFixed(1)}`;
+  }
+  return d+' Z';
+}
+function morph(now){
+  const tt=now/1000;
+  for(let i=0;i<N;i++){
+    const a=phases[i];
+    const r1=150+38*Math.sin(tt*0.9+a*3)+10*Math.sin(tt*0.35+a*7);
+    pA[i].x=CX+r1*Math.cos(a); pA[i].y=CY+r1*Math.sin(a);
+    const ang=a+tt*0.12, r2=104+26*Math.sin(tt*1.35+a*2+1.7);
+    pB[i].x=CX+r2*Math.cos(ang); pB[i].y=CY+r2*Math.sin(ang);
+  }
+  blobOuter.setAttribute('d',smoothPath(pA));
+  blobInner.setAttribute('d',smoothPath(pB));
+  requestAnimationFrame(morph);
+}
+
+/* ================= glitch age (10..34) ================= */
+const ageEl=$('#ageGlitch');
+const junk=['??','##','<>','!!'];
+let freezeUntil=0;
+setInterval(()=>{
+  const now=Date.now();
+  if(now<freezeUntil) return;
+  const r=Math.random();
+  if(r<0.06){
+    freezeUntil=now+900+Math.random()*800;
+    ageEl.classList.add('freeze');
+    setTimeout(()=>ageEl.classList.remove('freeze'),1100);
+    return;
+  }
+  if(r<0.20){ ageEl.textContent=junk[Math.floor(Math.random()*junk.length)]; return; }
+  ageEl.textContent=String(Math.floor(Math.random()*25)+10); // 10..34
+},90);
+
+/* ================= drag vertices ================= */
+const dragSvg=$('#dragSvg');
+const P=[{x:96,y:74},{x:268,y:62},{x:216,y:206}];
+const cols=['#b6ff3c','#9ff0c8','#f2b8cf'];
+const lines=[...dragSvg.querySelectorAll('line.tri')];
+const dots=[...dragSvg.querySelectorAll('circle.v')];
+const tls=[...dragSvg.querySelectorAll('text.vl')];
+const roEls=[$('#roA'),$('#roB'),$('#roC')];
+dots.forEach((d,i)=>{ d.style.fill=cols[i]; tls[i].style.fill=cols[i]; });
+const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
+function toSvgPos(e){
+  const r=dragSvg.getBoundingClientRect();
+  return {
+    x:clamp((e.clientX-r.left)*(360/r.width),14,346),
+    y:clamp((e.clientY-r.top)*(260/r.height),14,246)
+  };
+}
+let dragIdx=-1;
+dots.forEach((d,i)=>{
+  d.addEventListener('pointerdown',e=>{ dragIdx=i; try{d.setPointerCapture(e.pointerId);}catch(err){} e.preventDefault(); });
+  d.addEventListener('pointermove',e=>{ if(dragIdx!==i) return; const p=toSvgPos(e); P[i].x=p.x; P[i].y=p.y; drawTri(); });
+  d.addEventListener('pointerup',()=>{ dragIdx=-1; });
+  d.addEventListener('pointercancel',()=>{ dragIdx=-1; });
+});
+const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+function drawTri(){
+  for(let i=0;i<3;i++){
+    const a=P[i], b=P[(i+1)%3];
+    lines[i].setAttribute('x1',a.x); lines[i].setAttribute('y1',a.y);
+    lines[i].setAttribute('x2',b.x); lines[i].setAttribute('y2',b.y);
+    dots[i].setAttribute('cx',a.x); dots[i].setAttribute('cy',a.y);
+    tls[i].setAttribute('x',a.x+16); tls[i].setAttribute('y',a.y-12);
+  }
+  roEls.forEach((el,i)=>{ el.textContent=`${'ABC'[i]} (${Math.round(P[i].x)}, ${Math.round(P[i].y)})`; });
+  const A=Math.abs((P[1].x-P[0].x)*(P[2].y-P[0].y)-(P[2].x-P[0].x)*(P[1].y-P[0].y))/2;
+  const per=dist(P[0],P[1])+dist(P[1],P[2])+dist(P[2],P[0]);
+  $('#roArea').textContent=Math.round(A)+' '+t('ro_px2');
+  $('#roPerim').textContent=Math.round(per)+' '+t('ro_px');
+}
+
+/* ================= slider wave ================= */
+const wc=$('#waveCanvas'), wctx=wc.getContext('2d');
+let amp=42, freq=3, spd=1.0, ph=0, lastT=performance.now();
+function sizeWave(){
+  const box=wc.parentElement, dpr=window.devicePixelRatio||1, w=Math.max(200,box.clientWidth-8);
+  wc.width=Math.round(w*dpr); wc.height=Math.round(220*dpr);
+  wc.style.width=w+'px'; wc.style.height='220px';
+  wctx.setTransform(dpr,0,0,dpr,0,0);
+}
+function waveRead(){
+  $('#vAmp').textContent=amp;
+  $('#vFreq').textContent=freq;
+  $('#vSpd').textContent=spd.toFixed(1);
+  $('#waveEq').textContent=`y = ${amp} \u00b7 sin( ${freq}\u00b7x + t\u00b7${spd.toFixed(1)} )`;
+}
+$('#sAmp').addEventListener('input',e=>{ amp=+e.target.value; waveRead(); });
+$('#sFreq').addEventListener('input',e=>{ freq=+e.target.value; waveRead(); });
+$('#sSpd').addEventListener('input',e=>{ spd=+e.target.value; waveRead(); });
+function drawWave(now){
+  const dt=Math.min(0.05,(now-lastT)/1000); lastT=now; ph+=dt*spd;
+  const w=wc.clientWidth||300, h=220, mid=h/2;
+  wctx.clearRect(0,0,w,h);
+  wctx.strokeStyle='rgba(255,255,255,0.05)'; wctx.lineWidth=1;
+  for(let x=0;x<w;x+=40){ wctx.beginPath(); wctx.moveTo(x,0); wctx.lineTo(x,h); wctx.stroke(); }
+  for(let y=0;y<h;y+=40){ wctx.beginPath(); wctx.moveTo(0,y); wctx.lineTo(w,y); wctx.stroke(); }
+  wctx.strokeStyle='rgba(255,255,255,0.16)'; wctx.beginPath(); wctx.moveTo(0,mid); wctx.lineTo(w,mid); wctx.stroke();
+  wctx.beginPath();
+  for(let x=0;x<=w;x+=2){
+    const y=mid-amp*0.5*Math.sin((x/46)*freq*1.5+ph*0.8+1.1);
+    if(x===0){wctx.moveTo(x,y);}else{wctx.lineTo(x,y);}
+  }
+  wctx.strokeStyle='rgba(242,184,207,0.5)'; wctx.lineWidth=1.5; wctx.stroke();
+  const g=wctx.createLinearGradient(0,0,w,0);
+  g.addColorStop(0,'#9ff0c8'); g.addColorStop(1,'#b6ff3c');
+  wctx.beginPath();
+  for(let x=0;x<=w;x+=2){
+    const y=mid-amp*Math.sin((x/46)*freq+ph);
+    if(x===0){wctx.moveTo(x,y);}else{wctx.lineTo(x,y);}
+  }
+  wctx.strokeStyle=g; wctx.lineWidth=2.5; wctx.stroke();
+  requestAnimationFrame(drawWave);
+}
+
+/* ================= quiz ================= */
+let quizState=[null,null,null,null];
+const score=()=> DICT[lang].quiz_qs.reduce((s,q,i)=> s + (quizState[i]===q.a?1:0), 0);
+function renderQuiz(){
+  const qs=DICT[lang].quiz_qs, wrap=$('#quizCards');
+  wrap.innerHTML='';
+  qs.forEach((q,qi)=>{
+    const card=document.createElement('div');
+    card.className='qcard'+(quizState[qi]!==null?' locked':'');
+    const h=document.createElement('h3'); h.textContent=q.q; card.appendChild(h);
+    const owrap=document.createElement('div'); owrap.className='opts';
+    q.opts.forEach((o,oi)=>{
+      const b=document.createElement('button');
+      b.type='button'; b.className='opt'; b.textContent=o;
+      if(quizState[qi]!==null){
+        if(oi===q.a) b.classList.add('is-correct');
+        if(oi===quizState[qi] && quizState[qi]!==q.a) b.classList.add('is-wrong');
+      }
+      b.addEventListener('click',()=>answer(qi,oi));
+      owrap.appendChild(b);
+    });
+    card.appendChild(owrap); wrap.appendChild(card);
+  });
+  updateScore();
+}
+function answer(qi,oi){
+  if(quizState[qi]!==null) return;
+  quizState[qi]=oi;
+  const good=oi===DICT[lang].quiz_qs[qi].a;
+  renderQuiz();
+  const card=$('#quizCards').children[qi];
+  card.classList.add(good?'pulse-good':'pulse-bad');
+}
+function updateScore(){
+  const qs=DICT[lang].quiz_qs;
+  $('#quizScore').textContent=`${t('quiz_score')}: ${score()} / ${qs.length}`;
+  $('#quizDone').hidden=!quizState.every(v=>v!==null);
+}
+
+/* ================= path (step by step) ================= */
+let pathState=0;
+const pathList=$('#pathList');
+function makeStep(i,animate){
+  const s=DICT[lang].path_steps[i];
+  const li=document.createElement('div');
+  li.className='step'+(animate?'':' show');
+  const num=document.createElement('div'); num.className='step-num'; num.textContent=String(i+1).padStart(2,'0');
+  const box=document.createElement('div');
+  const h=document.createElement('h4'); h.textContent=s.t;
+  const p=document.createElement('p'); p.textContent=s.d;
+  box.appendChild(h); box.appendChild(p);
+  li.appendChild(num); li.appendChild(box);
+  return li;
+}
+function renderPath(){
+  pathList.innerHTML='';
+  for(let i=0;i<pathState;i++) pathList.appendChild(makeStep(i,false));
+  updatePathUI();
+}
+function updatePathUI(){
+  const total=DICT[lang].path_steps.length;
+  const btn=$('#pathBtn');
+  btn.textContent = pathState>=total ? t('path_done') : t('path_next');
+  btn.disabled = pathState>=total;
+  $('#pathReset').textContent=t('path_reset');
+  $('#pathDots').textContent=DICT[lang].path_steps.map((_,i)=>i<pathState?'\u25cf':'\u25cb').join(' ');
+}
+$('#pathBtn').addEventListener('click',()=>{
+  const total=DICT[lang].path_steps.length;
+  if(pathState>=total) return;
+  const li=makeStep(pathState,true);
+  pathList.appendChild(li);
+  pathState++;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>li.classList.add('show')));
+  updatePathUI();
+});
+$('#pathReset').addEventListener('click',()=>{ pathState=0; renderPath(); });
+
+/* ================= copy handle ================= */
+$('#copyTg').addEventListener('click',async()=>{
+  try{ await navigator.clipboard.writeText('@traxx05'); }catch(e){}
+  const b=$('#copyTg');
+  b.textContent=t('copied');
+  setTimeout(()=>{ b.textContent=t('copy'); },1500);
+});
+
+/* ================= init ================= */
+applyLang();
+drawTri();
+sizeWave();
+waveRead();
+requestAnimationFrame(drawWave);
+requestAnimationFrame(morph);
+window.addEventListener('resize',sizeWave);
+})();
+</script>
+</body>
+</html>
