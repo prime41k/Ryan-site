@@ -3,156 +3,1772 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>rayan41k — personal site</title>
-<meta name="description" content="rayan41k — personal intro site: python, servers, linux, curiosity. RU/EN.">
+<title>rayan41k — personal site v2</title>
+<meta name="description" content="rayan41k — personal site: python, linux, servers, networking. All projects, stack, path and facts. RU/EN.">
 <meta property="og:title" content="rayan41k — personal site">
-<meta property="og:description" content="python · servers · linux · curiosity — RU/EN">
-<meta name="theme-color" content="#0b0f0d">
+<meta property="og:description" content="python · linux · servers · networking — 13 repos, RU/EN, fully animated">
+<meta name="theme-color" content="#07090b">
 <style>
-:root{--bg:#0b0f0d;--card:#111714;--line:rgba(255,255,255,.09);--txt:#eef2ee;--mut:#8fa39a;--green:#b6ff3c;--mint:#9ff0c8;--pink:#f2b8cf;--red:#ff6b6b;--r:18px}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;background:var(--bg)}
-body{color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;z-index:-1;background:
- radial-gradient(640px 320px at 85% -5%,rgba(182,255,60,.09),transparent 70%),
- radial-gradient(520px 320px at -5% 105%,rgba(159,240,200,.07),transparent 70%),
- repeating-linear-gradient(0deg,transparent 0 31px,rgba(255,255,255,.022) 31px 32px),
- repeating-linear-gradient(90deg,transparent 0 31px,rgba(255,255,255,.022) 31px 32px)}
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+/* ============================================================
+   rayan41k · personal site v2
+   single-file · no deps · dark · pastel × acid-green
+   sections:
+   01 tokens & reset
+   02 base & utilities
+   03 preloader
+   04 overlays (scanlines, particles, matrix)
+   05 custom cursor
+   06 scroll progress + nav
+   07 hero + morphing shape + orbits
+   08 ticker marquee
+   09 stats counters
+   10 section headers
+   11 about cards
+   12 stack (bars + chips)
+   13 projects grid
+   14 playground (vertices + wave)
+   15 path timeline
+   16 learning rings
+   17 facts accordion
+   18 contact + terminal
+   19 footer + back-to-top
+   20 keyframes
+   21 responsive
+   ============================================================ */
 
-/* nav */
-.topnav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(11,15,13,.75);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.navrow{display:flex;align-items:center;gap:18px;height:58px}
-.logo{color:var(--txt);text-decoration:none;font-weight:700;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px}
-.caret{color:var(--green);animation:blink 1.1s steps(2) infinite}
-@keyframes blink{50%{opacity:0}}
-.topnav nav{display:flex;gap:16px;margin-left:auto;flex-wrap:wrap}
-.topnav nav a{color:var(--mut);text-decoration:none;font-size:13.5px;transition:color .2s}
-.topnav nav a:hover{color:var(--green)}
-.lang{margin-left:6px;background:none;border:1px solid var(--line);color:var(--txt);border-radius:999px;padding:5px 13px;cursor:pointer;font-size:12.5px;transition:.2s;font-family:inherit}
-.lang:hover{border-color:var(--green);color:var(--green)}
-
-/* hero */
-main{padding-top:58px}
-.hero{min-height:calc(100vh - 58px);display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:20px}
-.hi{color:var(--mint);font-size:15px;letter-spacing:.06em}
-.hero h1{font-size:clamp(44px,7vw,76px);line-height:1.05;font-family:ui-monospace,Menlo,Consolas,monospace;margin:6px 0 10px}
-.meta{color:var(--mut);font-size:14.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-#ageGlitch{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--green);display:inline-block;min-width:3ch;text-align:center;font-weight:700}
-#ageGlitch.freeze{color:#fff;text-shadow:2px 0 var(--pink),-2px 0 var(--green);animation:glitchy .3s steps(2) infinite}
-@keyframes glitchy{50%{transform:translateX(1.5px) skewX(4deg)}}
-.status{margin:14px 0 26px;font-size:17px;max-width:46ch;opacity:.92}
-.cta{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;text-decoration:none;font-size:14.5px;font-weight:600;cursor:pointer;border:1px solid transparent;transition:.2s;font-family:inherit}
-.btn.primary{background:var(--green);color:#0b0f0d}
-.btn.primary:hover{box-shadow:0 0 26px rgba(182,255,60,.45);transform:translateY(-1px)}
-.btn.ghost{border-color:var(--line);color:var(--txt);background:none}
-.btn.ghost:hover{border-color:var(--green);color:var(--green)}
-.hero-shape{display:flex;justify-content:center}
-.hero-shape svg{width:min(420px,80vw);height:auto;filter:drop-shadow(0 0 30px rgba(182,255,60,.28))}
-#morphRot{transform-box:view-box;transform-origin:center;animation:spin 26s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* sections */
-section.block{padding:84px 0 10px;scroll-margin-top:70px}
-h2{font-size:clamp(26px,4vw,38px);margin-bottom:6px;font-family:ui-monospace,Menlo,Consolas,monospace}
-.lead{color:var(--mut);margin-bottom:30px;max-width:60ch}
-
-/* about */
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;transition:.25s}
-.card:hover{transform:translateY(-3px);border-color:rgba(182,255,60,.4)}
-.card h3{font-size:16.5px;margin-bottom:8px}
-.card p{color:var(--mut);font-size:13.8px}
-.card .ico{font-size:22px;margin-bottom:10px;display:inline-block}
-
-/* playground */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
-.panel h3{font-size:18px;margin-bottom:4px}
-.panel .plead{color:var(--mut);font-size:13.5px;margin-bottom:16px}
-#dragSvg{width:100%;height:auto;touch-action:none;user-select:none;border-radius:12px;background:rgba(255,255,255,.02)}
-#dragSvg text{pointer-events:none}
-.v{cursor:grab;touch-action:none}
-.v:active{cursor:grabbing}
-.readouts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.chip{border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:12.5px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--mut);background:rgba(255,255,255,.02)}
-button.chip{cursor:pointer;transition:.2s}
-button.chip:hover{border-color:var(--green);color:var(--green)}
-.chip b{color:var(--txt);font-weight:600}
-.c0{color:var(--green)!important}.c1{color:var(--mint)!important}.c2{color:var(--pink)!important}
-.wave-box{border-radius:12px;background:rgba(255,255,255,.02);padding:4px}
-#waveCanvas{display:block}
-.sliders{display:grid;gap:12px;margin-top:16px}
-.sl{display:grid;grid-template-columns:110px 1fr 44px;align-items:center;gap:10px;font-size:13px;color:var(--mut)}
-.sl input{accent-color:var(--green);width:100%}
-.sl .val{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--txt);text-align:right;font-size:12.5px}
-.eq{margin-top:12px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--mint);font-size:13px}
-
-/* quiz */
-.qcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-bottom:14px;transition:border-color .3s}
-.qcard h3{font-size:16px;margin-bottom:12px}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.opt{background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:10px 14px;font-size:13.5px;cursor:pointer;text-align:left;transition:.2s;font-family:inherit}
-.opt:hover{border-color:rgba(182,255,60,.5)}
-.opt.is-correct{border-color:var(--green);color:var(--green);background:rgba(182,255,60,.09);opacity:1!important}
-.opt.is-wrong{border-color:var(--red);color:var(--red);background:rgba(255,107,107,.08);opacity:1!important}
-.qcard.locked .opt{opacity:.45;pointer-events:none}
-@keyframes pulseGood{0%{box-shadow:0 0 0 0 rgba(182,255,60,.55)}70%{box-shadow:0 0 0 16px rgba(182,255,60,0)}100%{box-shadow:0 0 0 0 rgba(182,255,60,0)}}
-@keyframes pulseBad{0%{box-shadow:0 0 0 0 rgba(255,107,107,.55)}70%{box-shadow:0 0 0 16px rgba(255,107,107,0)}100%{box-shadow:0 0 0 0 rgba(255,107,107,0)}}
-.pulse-good{animation:pulseGood .8s ease-out 2;border-color:var(--green)!important}
-.pulse-bad{animation:pulseBad .8s ease-out 2;border-color:var(--red)!important}
-.scoreline{display:flex;gap:14px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
-#quizScore{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--green);font-size:14px}
-#quizDone{color:var(--mint);font-size:14px}
-
-/* path */
-.dots{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--green);letter-spacing:6px;font-size:14px;margin-bottom:14px}
-#pathList{display:grid;gap:12px;margin-bottom:18px}
-.step{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;opacity:0;transform:translateY(10px);transition:.5s ease}
-.step.show{opacity:1;transform:none}
-.step-num{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--green);font-size:15px;font-weight:700}
-.step h4{font-size:15.5px;margin-bottom:3px}
-.step p{color:var(--mut);font-size:13.5px}
-.pathbtns{display:flex;gap:10px}
-.btn.small{padding:9px 18px;font-size:13px}
-.btn.small:disabled{opacity:.5;cursor:default;box-shadow:none;transform:none}
-
-/* contact */
-.contact-grid{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.soon{border:1px dashed rgba(242,184,207,.5);color:var(--pink);border-radius:999px;padding:9px 16px;font-size:13px}
-
-footer{margin-top:90px;border-top:1px solid var(--line);padding:26px 0 34px;color:var(--mut);font-size:13px;text-align:center}
-
-@media(max-width:900px){
- .cards{grid-template-columns:repeat(2,1fr)}
- .hero{grid-template-columns:1fr;padding-top:30px}
- .hero-shape{order:-1}
- .hero-shape svg{width:min(300px,70vw)}
- .grid2{grid-template-columns:1fr}
+/* ============ 01 · TOKENS & RESET ============ */
+:root {
+  --bg: #07090b;
+  --bg2: #0a0e0c;
+  --card: #101513;
+  --card2: #0d1210;
+  --line: rgba(255, 255, 255, .09);
+  --line2: rgba(255, 255, 255, .16);
+  --txt: #eef2ee;
+  --mut: #8fa39a;
+  --green: #b6ff3c;
+  --green2: #7be0a3;
+  --mint: #9ff0c8;
+  --pink: #f2b8cf;
+  --lav: #c9b8ff;
+  --sky: #9fd4ff;
+  --red: #ff6b6b;
+  --r: 18px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 }
-@media(max-width:560px){
- .cards{grid-template-columns:1fr}
- .opts{grid-template-columns:1fr}
- .topnav nav{display:none}
- .sl{grid-template-columns:96px 1fr 40px}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+body {
+  color: var(--txt);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+a {
+  color: inherit;
+}
+button {
+  font-family: inherit;
+}
+::selection {
+  background: rgba(182, 255, 60, .28);
+  color: #fff;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #1d2b23;
+  border-radius: 99px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2b4237;
+}
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+.mono {
+  font-family: var(--mono);
+}
+.ic {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ============ 02 · BASE & UTILITIES ============ */
+main {
+  padding-top: 58px;
+  position: relative;
+  z-index: 3;
+}
+section.block {
+  padding: 110px 0 0;
+  scroll-margin-top: 84px;
+}
+html.js .rv {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .8s ease, transform .8s cubic-bezier(.22, 1, .36, 1);
+}
+html.js .rv.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============ 03 · PRELOADER ============ */
+.pre {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--bg);
+  display: none;
+  place-items: center;
+}
+html.js .pre {
+  display: grid;
+}
+.pre.done {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .55s ease, visibility .55s;
+}
+.pre-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.pre-logo {
+  font-family: var(--mono);
+  font-size: 26px;
+  letter-spacing: .04em;
+  color: var(--txt);
+}
+.pre-logo b {
+  color: var(--green);
+  animation: blink 1s steps(2) infinite;
+}
+.pre-bar {
+  width: 190px;
+  height: 3px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, .08);
+  overflow: hidden;
+}
+.pre-bar i {
+  display: block;
+  height: 100%;
+  width: 42%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--mint), var(--green));
+  animation: preload 1.1s ease-in-out infinite;
+}
+.pre-txt {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .3em;
+  color: var(--mut);
+  text-transform: uppercase;
+}
+
+/* ============ 04 · OVERLAYS ============ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(720px 340px at 88% -6%, rgba(182, 255, 60, .09), transparent 70%),
+    radial-gradient(560px 340px at -6% 106%, rgba(159, 240, 200, .07), transparent 70%),
+    radial-gradient(500px 300px at 50% 120%, rgba(201, 184, 255, .05), transparent 70%),
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(255, 255, 255, .02) 31px 32px),
+    repeating-linear-gradient(90deg, transparent 0 31px, rgba(255, 255, 255, .02) 31px 32px);
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .1;
+  mix-blend-mode: overlay;
+  background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(0, 0, 0, .8) 2px 4px);
+}
+#bgp {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .5;
+}
+#mx {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .7s ease;
+  display: none;
+}
+body.mx #mx {
+  display: block;
+  opacity: .15;
+}
+body.mx .topnav {
+  background: rgba(7, 9, 11, .92);
+}
+
+/* ============ 05 · CUSTOM CURSOR ============ */
+.cur-dot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  pointer-events: none;
+  z-index: 120;
+  transform: translate(-50%, -50%);
+}
+.cur-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(182, 255, 60, .5);
+  pointer-events: none;
+  z-index: 120;
+  transform: translate(-50%, -50%);
+  transition: width .25s ease, height .25s ease, border-color .25s ease;
+}
+.cur-ring.big {
+  width: 54px;
+  height: 54px;
+  border-color: var(--pink);
+}
+@media (pointer: fine) {
+  html.js body {
+    cursor: none;
+  }
+  html.js a,
+  html.js button,
+  html.js input {
+    cursor: none;
+  }
+}
+@media (pointer: coarse) {
+  .cur-dot,
+  .cur-ring {
+    display: none;
+  }
+}
+
+/* ============ 06 · PROGRESS + NAV ============ */
+.pbar-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 90;
+  pointer-events: none;
+}
+.pbar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--mint), var(--green));
+  box-shadow: 0 0 12px rgba(182, 255, 60, .6);
+}
+.topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 80;
+  background: rgba(7, 9, 11, .72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  transition: background .3s ease, box-shadow .3s ease;
+}
+.topnav.scrolled {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .45);
+  background: rgba(7, 9, 11, .88);
+}
+.navrow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 58px;
+}
+.logo {
+  color: var(--txt);
+  text-decoration: none;
+  font-weight: 700;
+  font-family: var(--mono);
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.logo::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 0 rgba(182, 255, 60, .5);
+  animation: ping 2.4s ease-out infinite;
+}
+.caret {
+  color: var(--green);
+  animation: blink 1.1s steps(2) infinite;
+}
+.topnav nav {
+  display: flex;
+  gap: 15px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+.topnav nav a {
+  color: var(--mut);
+  text-decoration: none;
+  font-size: 13.5px;
+  transition: color .2s ease, transform .2s ease;
+  position: relative;
+  padding: 4px 0;
+}
+.topnav nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+.topnav nav a:hover,
+.topnav nav a.act {
+  color: var(--green);
+}
+.topnav nav a:hover::after,
+.topnav nav a.act::after {
+  transform: scaleX(1);
+}
+.navtools {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.lang,
+.iconbtn {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--txt);
+  border-radius: 999px;
+  padding: 5px 13px;
+  cursor: pointer;
+  font-size: 12.5px;
+  transition: border-color .25s ease, color .25s ease, background .25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.iconbtn {
+  padding: 6px 9px;
+}
+.iconbtn .ic {
+  width: 14px;
+  height: 14px;
+}
+.lang:hover,
+.iconbtn:hover,
+.iconbtn.on {
+  border-color: var(--green);
+  color: var(--green);
+}
+.iconbtn.on {
+  background: rgba(182, 255, 60, .08);
+}
+
+/* ============ 07 · HERO ============ */
+.hero {
+  position: relative;
+  min-height: calc(100vh);
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: 24px;
+  padding-top: 60px;
+  padding-bottom: 110px;
+}
+.hi {
+  color: var(--mint);
+  font-size: 15px;
+  letter-spacing: .08em;
+}
+.hero h1 {
+  font-size: clamp(46px, 7.2vw, 82px);
+  line-height: 1.04;
+  font-family: var(--mono);
+  margin: 8px 0 10px;
+}
+.hero h1.gl {
+  animation: glitchShift .3s steps(2) 2;
+}
+.tagline {
+  color: var(--mint);
+  font-family: var(--mono);
+  font-size: 15px;
+  min-height: 26px;
+}
+.caret2 {
+  display: inline-block;
+  width: 9px;
+  height: 16px;
+  background: var(--green);
+  margin-left: 4px;
+  vertical-align: -2px;
+  animation: blink 1s steps(2) infinite;
+}
+.meta {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin: 18px 0 30px;
+}
+.meta-i {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  color: var(--mut);
+  background: rgba(255, 255, 255, .02);
+  transition: border-color .25s ease, transform .25s ease;
+}
+.meta-i:hover {
+  border-color: rgba(182, 255, 60, .5);
+  transform: translateY(-2px);
+}
+.meta-i .ic {
+  width: 14px;
+  height: 14px;
+  color: var(--green);
+}
+.meta-i b {
+  color: var(--txt);
+  font-family: var(--mono);
+}
+#ageGlitch {
+  font-family: var(--mono);
+  color: var(--green);
+  display: inline-block;
+  min-width: 3ch;
+  text-align: center;
+  font-weight: 700;
+}
+#ageGlitch.freeze {
+  color: #fff;
+  text-shadow: 2px 0 var(--pink), -2px 0 var(--green);
+  animation: glitchy .3s steps(2) infinite;
+}
+.fr {
+  color: var(--mint);
+  font-family: var(--mono);
+  font-size: 11px;
+  border: 1px solid rgba(159, 240, 200, .4);
+  padding: 1px 7px;
+  border-radius: 6px;
+}
+.live {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: ping 2s ease-out infinite;
+}
+.cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: box-shadow .25s ease, border-color .25s ease, color .25s ease, transform .18s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn .ic {
+  width: 16px;
+  height: 16px;
+}
+.btn.primary {
+  background: var(--green);
+  color: #0b0f0d;
+}
+.btn.primary:hover {
+  box-shadow: 0 0 30px rgba(182, 255, 60, .5);
+}
+.btn.ghost {
+  border-color: var(--line2);
+  color: var(--txt);
+  background: rgba(255, 255, 255, .02);
+}
+.btn.ghost:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+.morph-wrap {
+  position: relative;
+  width: min(430px, 86vw);
+  aspect-ratio: 1;
+  margin-inline: auto;
+}
+.morph-wrap svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 34px rgba(182, 255, 60, .3));
+}
+#morphRot {
+  transform-box: view-box;
+  transform-origin: center;
+  animation: spin 30s linear infinite;
+}
+#morphSvg .dashm {
+  stroke-dasharray: 5 9;
+  animation: dashmove 1.3s linear infinite;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, .13);
+  animation: spin 14s linear infinite;
+}
+.orb i {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 12px var(--green);
+}
+.orb.o1 {
+  inset: 2%;
+}
+.orb.o2 {
+  inset: 9%;
+  animation-duration: 20s;
+  animation-direction: reverse;
+}
+.orb.o2 i {
+  background: var(--pink);
+  box-shadow: 0 0 12px var(--pink);
+}
+.orb.o3 {
+  inset: 17%;
+  animation-duration: 27s;
+}
+.orb.o3 i {
+  background: var(--mint);
+  box-shadow: 0 0 12px var(--mint);
+}
+.scl {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  color: var(--mut);
+  font-size: 10.5px;
+  letter-spacing: .3em;
+  text-decoration: none;
+  font-family: var(--mono);
+  text-transform: uppercase;
+}
+.scl .ic {
+  width: 16px;
+  height: 16px;
+  color: var(--green);
+  animation: bob 1.8s ease-in-out infinite;
+}
+.scl:hover {
+  color: var(--green);
+}
+
+/* ============ 08 · TICKER ============ */
+.tick {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: rgba(182, 255, 60, .03);
+  padding: 15px 0;
+}
+.tick-row {
+  display: flex;
+  width: max-content;
+  animation: marq 30s linear infinite;
+}
+.tick-row.rev {
+  animation-direction: reverse;
+  animation-duration: 38s;
+}
+.tick-inner {
+  display: flex;
+  gap: 46px;
+  padding-right: 46px;
+}
+.tick-inner span {
+  font-family: var(--mono);
+  color: var(--mut);
+  letter-spacing: .14em;
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+.tick-inner span b {
+  color: var(--green);
+  font-weight: 600;
+}
+.tick + .tick {
+  border-top: 0;
+}
+
+/* ============ 09 · STATS ============ */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.stat {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 30px 16px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s ease, border-color .3s ease;
+}
+.stat:hover {
+  transform: translateY(-4px);
+  border-color: rgba(182, 255, 60, .4);
+}
+.stat::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(182, 255, 60, .07), transparent);
+  transition: left .7s ease;
+}
+.stat:hover::after {
+  left: 120%;
+}
+.stat b {
+  font-size: clamp(36px, 5vw, 54px);
+  font-family: var(--mono);
+  color: var(--green);
+  line-height: 1;
+}
+.stat .suf {
+  font-family: var(--mono);
+  color: var(--mint);
+  font-size: clamp(20px, 3vw, 30px);
+}
+.stat p {
+  color: var(--mut);
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* ============ 10 · SECTION HEADERS ============ */
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+.sec-ico {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--green);
+  background: rgba(182, 255, 60, .06);
+  flex-shrink: 0;
+}
+.sec-ico .ic {
+  width: 20px;
+  height: 20px;
+}
+.sec-t {
+  font-size: clamp(28px, 4.4vw, 42px);
+  font-family: var(--mono);
+}
+.sec-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(182, 255, 60, .55), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s ease .25s;
+}
+.rv.in .sec-line,
+.sec-head.in .sec-line {
+  transform: scaleX(1);
+}
+.sec-lead {
+  color: var(--mut);
+  margin: 4px 0 38px;
+  max-width: 64ch;
+}
+
+/* ============ 11 · ABOUT CARDS ============ */
+.cards6 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.card {
+  --ac: var(--green);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 22px;
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.card:nth-child(6n + 2) {
+  --ac: var(--mint);
+}
+.card:nth-child(6n + 3) {
+  --ac: var(--pink);
+}
+.card:nth-child(6n + 4) {
+  --ac: var(--lav);
+}
+.card:nth-child(6n + 5) {
+  --ac: var(--sky);
+}
+.card:nth-child(6n + 6) {
+  --ac: var(--green2);
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--ac);
+  box-shadow: 0 16px 44px -18px color-mix(in srgb, var(--ac) 55%, transparent);
+}
+.card-ico {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  display: grid;
+  place-items: center;
+  color: var(--ac);
+  margin-bottom: 14px;
+  background: rgba(255, 255, 255, .02);
+}
+.card-ico .ic {
+  width: 19px;
+  height: 19px;
+}
+.card:hover .card-ico .ic {
+  animation: wob .5s ease;
+}
+.card h3 {
+  font-size: 16.5px;
+  margin-bottom: 7px;
+}
+.card p {
+  color: var(--mut);
+  font-size: 13.6px;
+}
+
+/* ============ 12 · STACK ============ */
+.stack-grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 40px;
+  align-items: start;
+}
+.bar {
+  margin-bottom: 20px;
+}
+.bar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13.5px;
+  margin-bottom: 9px;
+}
+.bar-top b {
+  color: var(--txt);
+  font-weight: 600;
+}
+.bar-top .pct {
+  font-family: var(--mono);
+  color: var(--green);
+  font-size: 12.5px;
+}
+.bar-track {
+  height: 8px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, .06);
+  overflow: hidden;
+  position: relative;
+}
+.bar-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--mint), var(--green));
+  transition: width 1.3s cubic-bezier(.22, 1, .36, 1);
+  position: relative;
+}
+.bar-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .45), transparent);
+  transform: translateX(-100%);
+  animation: shine 2.6s linear infinite;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.chips-title {
+  font-family: var(--mono);
+  color: var(--mut);
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+.chip2 {
+  border: 1px solid var(--line);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--mut);
+  background: rgba(255, 255, 255, .02);
+  transition: color .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+  cursor: default;
+  user-select: none;
+}
+.chip2:hover {
+  color: var(--green);
+  border-color: var(--green);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(182, 255, 60, .14);
+}
+
+/* ============ 13 · PROJECTS ============ */
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.fbtn {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--mut);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: var(--mono);
+  transition: color .25s ease, border-color .25s ease, background .25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.fbtn:hover {
+  color: var(--txt);
+  border-color: var(--line2);
+}
+.fbtn.on {
+  background: var(--green);
+  color: #0b0f0d;
+  border-color: var(--green);
+  font-weight: 600;
+}
+.pgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.pcard {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 20px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform .18s ease-out, border-color .3s ease, box-shadow .3s ease;
+}
+.pcard:hover {
+  border-color: rgba(255, 255, 255, .22);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .45), 0 0 26px -8px var(--c);
+}
+.pcard.hide {
+  display: none;
+}
+.pcard.pop {
+  animation: pop .4s ease both;
+}
+.pnum {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, .16);
+}
+.pcard-link {
+  display: block;
+  text-decoration: none;
+}
+.pcard-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.pname {
+  font-family: var(--mono);
+  font-size: 16px;
+  color: var(--txt);
+  margin-bottom: 7px;
+  word-break: break-all;
+  transition: color .25s ease;
+}
+.pcard:hover .pname {
+  color: var(--green);
+}
+.pdesc {
+  color: var(--mut);
+  font-size: 13px;
+  min-height: 42px;
+}
+.pfoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+.plang {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--mut);
+}
+.plang i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 8px var(--c);
+}
+.picon {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--mut);
+  transition: color .25s ease, border-color .25s ease, transform .25s ease;
+}
+.picon .ic {
+  width: 14px;
+  height: 14px;
+}
+.pcard:hover .picon {
+  color: var(--green);
+  border-color: var(--green);
+  transform: translate(2px, -2px);
+}
+.pr-note {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--mut);
+  font-size: 13px;
+  margin-top: 22px;
+}
+.pr-note .ic {
+  width: 15px;
+  height: 15px;
+  color: var(--green);
+  flex-shrink: 0;
+}
+
+/* ============ 14 · PLAYGROUND ============ */
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 22px;
+  position: relative;
+}
+.panel h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.panel .plead {
+  color: var(--mut);
+  font-size: 13.5px;
+  margin-bottom: 18px;
+}
+.pidx {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, .18);
+}
+#dragSvg {
+  width: 100%;
+  height: auto;
+  touch-action: none;
+  user-select: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .02);
+}
+#dragSvg text {
+  pointer-events: none;
+}
+.v {
+  cursor: grab;
+  touch-action: none;
+}
+.v:active {
+  cursor: grabbing;
+}
+.readouts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+.chip {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 6px 13px;
+  font-size: 12.5px;
+  font-family: var(--mono);
+  color: var(--mut);
+  background: rgba(255, 255, 255, .02);
+}
+button.chip {
+  cursor: pointer;
+  transition: color .25s ease, border-color .25s ease;
+}
+button.chip:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+.chip b {
+  color: var(--txt);
+  font-weight: 600;
+}
+.c0 {
+  color: var(--green) !important;
+}
+.c1 {
+  color: var(--mint) !important;
+}
+.c2 {
+  color: var(--pink) !important;
+}
+.wave-box {
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .02);
+  padding: 4px;
+}
+#waveCanvas {
+  display: block;
+}
+.sliders {
+  display: grid;
+  gap: 13px;
+  margin-top: 18px;
+}
+.sl {
+  display: grid;
+  grid-template-columns: 110px 1fr 44px;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--mut);
+}
+.sl input {
+  accent-color: var(--green);
+  width: 100%;
+}
+.sl .val {
+  font-family: var(--mono);
+  color: var(--txt);
+  text-align: right;
+  font-size: 12.5px;
+}
+.eq {
+  margin-top: 13px;
+  font-family: var(--mono);
+  color: var(--mint);
+  font-size: 13px;
+}
+
+/* ============ 15 · PATH TIMELINE ============ */
+.tl {
+  position: relative;
+  margin-top: 10px;
+}
+.tl::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--green), rgba(182, 255, 60, .04));
+}
+.tl-item {
+  position: relative;
+  display: flex;
+  gap: 18px;
+  padding: 0 0 26px 58px;
+}
+.tl-item:last-child {
+  padding-bottom: 0;
+}
+.tl-dot {
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  z-index: 2;
+}
+.tl-dot i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: ping 2.4s ease-out infinite;
+}
+.tl-body {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px 20px;
+  flex: 1;
+  transition: border-color .3s ease, transform .3s ease;
+}
+.tl-body:hover {
+  border-color: rgba(182, 255, 60, .4);
+  transform: translateX(4px);
+}
+.tl-step {
+  font-family: var(--mono);
+  color: var(--green);
+  font-size: 11.5px;
+  letter-spacing: .18em;
+  display: block;
+  margin-bottom: 5px;
+}
+.tl-body h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.tl-body p {
+  color: var(--mut);
+  font-size: 13.5px;
+}
+
+/* ============ 16 · LEARNING RINGS ============ */
+.rings {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.ring-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 24px;
+  text-align: center;
+  transition: transform .3s ease, border-color .3s ease;
+}
+.ring-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--rc, var(--green));
+}
+.ring-wrap {
+  position: relative;
+  width: 122px;
+  height: 122px;
+  margin: 0 auto 14px;
+}
+.ring-wrap svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, .07);
+  stroke-width: 8;
+}
+.ring-fg {
+  fill: none;
+  stroke: var(--rc, var(--green));
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 327;
+  stroke-dashoffset: 327;
+  transition: stroke-dashoffset 1.6s cubic-bezier(.22, 1, .36, 1);
+  filter: drop-shadow(0 0 6px var(--rc, var(--green)));
+}
+.ring-num {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 22px;
+  color: var(--txt);
+}
+.ring-num i {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--mut);
+  margin-left: 2px;
+}
+.ring-card p {
+  color: var(--mut);
+  font-size: 13.5px;
+}
+
+/* ============ 17 · FACTS ACCORDION ============ */
+.acc {
+  display: grid;
+  gap: 10px;
+  max-width: 860px;
+}
+.acc-item {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color .3s ease;
+}
+.acc-item.open {
+  border-color: rgba(182, 255, 60, .45);
+}
+.acc-q {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 17px 20px;
+  background: none;
+  border: 0;
+  color: var(--txt);
+  font-size: 15px;
+  cursor: pointer;
+  text-align: left;
+}
+.acc-q .ic {
+  width: 18px;
+  height: 18px;
+  color: var(--mut);
+  transition: transform .35s ease, color .35s ease;
+  flex-shrink: 0;
+}
+.acc-item.open .acc-q .ic {
+  transform: rotate(180deg);
+  color: var(--green);
+}
+.acc-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .45s cubic-bezier(.22, 1, .36, 1);
+}
+.acc-a p {
+  padding: 0 20px 18px;
+  color: var(--mut);
+  font-size: 14px;
+  max-width: 70ch;
+}
+
+/* ============ 18 · CONTACT + TERMINAL ============ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 16px;
+  align-items: stretch;
+}
+.ct-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+}
+.ct-card h3 {
+  font-size: clamp(20px, 2.6vw, 27px);
+  line-height: 1.35;
+  max-width: 24ch;
+}
+.ct-chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.soon {
+  border: 1px dashed rgba(242, 184, 207, .55);
+  color: var(--pink);
+  border-radius: 999px;
+  padding: 9px 17px;
+  font-size: 13px;
+}
+.term {
+  background: #0a0e0c;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  font-family: var(--mono);
+  font-size: 13px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .4);
+}
+.term-bar {
+  display: flex;
+  gap: 7px;
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, .02);
+  align-items: center;
+}
+.term-bar i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.term-bar i:nth-child(1) {
+  background: #ff5f56;
+}
+.term-bar i:nth-child(2) {
+  background: #ffbd2e;
+}
+.term-bar i:nth-child(3) {
+  background: #27c93f;
+}
+.term-bar span {
+  margin-left: 10px;
+  color: var(--mut);
+  font-size: 11.5px;
+}
+.term-body {
+  padding: 18px;
+  min-height: 210px;
+  line-height: 1.75;
+}
+.term-body .cmd {
+  color: var(--green);
+}
+.term-body .out {
+  color: var(--mut);
+}
+.term-body .typing::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: var(--green);
+  margin-left: 3px;
+  vertical-align: -2px;
+  animation: blink 1s steps(2) infinite;
+}
+
+/* ============ 19 · FOOTER + BTT ============ */
+.foot {
+  border-top: 1px solid var(--line);
+  margin-top: 110px;
+  padding: 30px 0 34px;
+  color: var(--mut);
+  font-size: 13px;
+}
+.foot-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.heart {
+  color: var(--pink);
+  display: inline-flex;
+  vertical-align: -2px;
+  margin: 0 3px;
+}
+.heart .ic {
+  width: 14px;
+  height: 14px;
+  animation: beat 1.7s ease-in-out infinite;
+}
+.foot .ver {
+  font-family: var(--mono);
+  color: rgba(255, 255, 255, .3);
+}
+.btt {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(13, 17, 15, .82);
+  backdrop-filter: blur(8px);
+  color: var(--green);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease, transform .3s ease, border-color .3s ease;
+  z-index: 70;
+}
+.btt.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.btt:hover {
+  border-color: var(--green);
+  transform: translateY(-3px);
+}
+.btt .ic {
+  width: 18px;
+  height: 18px;
+}
+
+/* ============ 20 · KEYFRAMES ============ */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes preload {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dashmove {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+@keyframes glitchy {
+  50% {
+    transform: translateX(1.5px) skewX(4deg);
+  }
+}
+@keyframes glitchShift {
+  0% {
+    text-shadow: 2px 0 var(--pink), -2px 0 var(--green2);
+    transform: translateX(1px) skewX(-2deg);
+  }
+  50% {
+    text-shadow: -3px 0 var(--pink), 3px 0 var(--green2);
+    transform: translateX(-1px);
+  }
+  100% {
+    text-shadow: none;
+    transform: none;
+  }
+}
+@keyframes marq {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes shine {
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes ping {
+  0% {
+    box-shadow: 0 0 0 0 rgba(182, 255, 60, .5);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(182, 255, 60, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(182, 255, 60, 0);
+  }
+}
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+@keyframes beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  12% {
+    transform: scale(1.28);
+  }
+  24% {
+    transform: scale(1);
+  }
+  36% {
+    transform: scale(1.18);
+  }
+}
+@keyframes rip {
+  from {
+    transform: scale(.2);
+    opacity: .7;
+  }
+  to {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(.97);
+  }
+}
+@keyframes wob {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-9deg);
+  }
+  75% {
+    transform: rotate(9deg);
+  }
+}
+
+/* ============ 21 · RESPONSIVE ============ */
+@media (max-width: 1020px) {
+  .cards6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pgrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .rings {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stack-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 40px;
+    padding-bottom: 80px;
+    text-align: left;
+  }
+  .morph-wrap {
+    order: -1;
+    width: min(280px, 64vw);
+  }
+  .scl {
+    display: none;
+  }
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .cards6 {
+    grid-template-columns: 1fr;
+  }
+  .pgrid {
+    grid-template-columns: 1fr;
+  }
+  .rings {
+    grid-template-columns: 1fr;
+  }
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .topnav nav {
+    display: none;
+  }
+  .sl {
+    grid-template-columns: 96px 1fr 40px;
+  }
+  .opts {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  html.js .rv {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
 </style>
+<noscript><style>.pre{display:none!important}</style></noscript>
 </head>
 <body>
 
+<!-- preloader -->
+<div class="pre">
+  <div class="pre-box">
+    <div class="pre-logo">rayan41k<b>_</b></div>
+    <div class="pre-bar"><i></i></div>
+    <div class="pre-txt">loading · compiling curiosity</div>
+  </div>
+</div>
+
+<!-- scroll progress -->
+<div class="pbar-wrap"><div class="pbar" id="pbar"></div></div>
+
+<!-- background canvases -->
+<canvas id="bgp" aria-hidden="true"></canvas>
+<canvas id="mx" aria-hidden="true"></canvas>
+
+<!-- custom cursor -->
+<div class="cur-dot" id="curDot"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<!-- ================= NAV ================= -->
 <header class="topnav">
   <div class="wrap navrow">
     <a class="logo" href="#top">rayan41k<span class="caret">_</span></a>
     <nav>
-      <a href="#about" data-i18n="nav_about">обо мне</a>
-      <a href="#playground" data-i18n="nav_play">плейграунд</a>
-      <a href="#quiz" data-i18n="nav_quiz">квиз</a>
-      <a href="#path" data-i18n="nav_path">путь</a>
-      <a href="#contact" data-i18n="nav_contact">контакты</a>
+      <a href="#about" data-i18n="n_about">обо мне</a>
+      <a href="#stack" data-i18n="n_stack">стек</a>
+      <a href="#projects" data-i18n="n_projects">проекты</a>
+      <a href="#playground" data-i18n="n_play">плейграунд</a>
+      <a href="#path" data-i18n="n_path">путь</a>
+      <a href="#now" data-i18n="n_now">сейчас учу</a>
+      <a href="#facts" data-i18n="n_facts">факты</a>
+      <a href="#contact" data-i18n="n_contact">контакты</a>
     </nav>
-    <button id="langBtn" class="lang">EN</button>
+    <div class="navtools">
+      <button id="mxBtn" class="iconbtn" type="button" title="matrix mode (konami works too)">
+        <svg class="ic"><use href="#i-monitor"/></svg>
+      </button>
+      <button id="langBtn" class="lang" type="button">EN</button>
+    </div>
   </div>
 </header>
 
@@ -160,22 +1776,41 @@ footer{margin-top:90px;border-top:1px solid var(--line);padding:26px 0 34px;colo
   <!-- ================= HERO ================= -->
   <section class="hero wrap" id="top">
     <div class="hero-text">
-      <p class="hi" data-i18n="hero_hi">привет, я</p>
-      <h1>rayan41k<span class="caret">_</span></h1>
-      <div class="meta">
-        <span data-i18n="age_label">возраст:</span>
-        <span id="ageGlitch" title="age.exe has stopped working">??</span>
-        <span>·</span>
-        <span data-i18n="hero_from">из Франции</span>
-        <span>🇫🇷</span>
+      <p class="hi rv" data-i18n="h_hi">привет, я</p>
+      <h1 id="heroName" class="rv" data-d="60">rayan41k<span class="caret">_</span></h1>
+      <p class="tagline rv" data-d="120"><span id="typer"></span><span class="caret2"></span></p>
+      <div class="meta rv" data-d="190">
+        <span class="meta-i">
+          <svg class="ic"><use href="#i-clock"/></svg>
+          <span data-i18n="h_age_label">возраст:</span>
+          <b id="ageGlitch" title="age.exe has stopped working">??</b>
+        </span>
+        <span class="meta-i">
+          <svg class="ic"><use href="#i-globe"/></svg>
+          <span data-i18n="h_from">из Франции</span>
+          <b class="fr">FR</b>
+        </span>
+        <span class="meta-i">
+          <svg class="ic"><use href="#i-activity"/></svg>
+          <span data-i18n="h_status">онлайн</span>
+          <i class="live"></i>
+        </span>
       </div>
-      <p class="status" data-i18n="hero_status">«каждый день узнаю что-то новое»</p>
-      <div class="cta">
-        <a class="btn primary" href="https://t.me/traxx05" target="_blank" rel="noopener"><span data-i18n="btn_tg">написать в Telegram</span> ↗</a>
-        <a class="btn ghost" href="#playground"><span data-i18n="btn_play">плейграунд ↓</span></a>
+      <div class="cta rv" data-d="260">
+        <a class="btn primary mag" href="https://t.me/traxx05" target="_blank" rel="noopener">
+          <svg class="ic"><use href="#i-send"/></svg>
+          <span data-i18n="h_cta_tg">написать в Telegram</span>
+        </a>
+        <a class="btn ghost mag" href="#playground">
+          <svg class="ic"><use href="#i-zap"/></svg>
+          <span data-i18n="h_cta_play">плейграунд</span>
+        </a>
       </div>
     </div>
-    <div class="hero-shape">
+    <div class="morph-wrap rv" data-d="150">
+      <div class="orb o1"><i></i></div>
+      <div class="orb o2"><i></i></div>
+      <div class="orb o3"><i></i></div>
       <svg id="morphSvg" viewBox="0 0 420 420" aria-hidden="true">
         <defs>
           <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
@@ -185,32 +1820,382 @@ footer{margin-top:90px;border-top:1px solid var(--line);padding:26px 0 34px;colo
         </defs>
         <g id="morphRot">
           <path id="blobOuter" fill="rgba(182,255,60,0.05)" stroke="url(#g1)" stroke-width="2.5"/>
-          <path id="blobInner" fill="none" stroke="#f2b8cf" stroke-width="1.5" opacity="0.55"/>
+          <path id="blobMid" class="dashm" fill="none" stroke="#9ff0c8" stroke-width="1.5" opacity="0.6"/>
+          <path id="blobInner" fill="rgba(242,184,207,0.05)" stroke="#f2b8cf" stroke-width="1.5" opacity="0.7"/>
         </g>
       </svg>
+    </div>
+    <a class="scl" href="#stats">
+      <span data-i18n="h_scroll">скролль вниз</span>
+      <svg class="ic"><use href="#i-chev"/></svg>
+    </a>
+  </section>
+
+  <!-- ================= TICKER ================= -->
+  <div class="tick rv">
+    <div class="tick-row">
+      <div class="tick-inner">
+        <span><b>Python</b> · structs</span>
+        <span><b>Linux</b> · bash · systemd</span>
+        <span><b>HTTP</b> · TCP/IP</span>
+        <span><b>DNS</b> · packets</span>
+        <span><b>Git</b> · commits</span>
+        <span><b>SSH</b> · servers</span>
+        <span><b>RegExp</b> · patterns</span>
+        <span><b>Cron</b> · automation</span>
+        <span><b>Logs</b> · debugging</span>
+        <span><b>Curiosity</b> · 24/7</span>
+      </div>
+      <div class="tick-inner">
+        <span><b>Python</b> · structs</span>
+        <span><b>Linux</b> · bash · systemd</span>
+        <span><b>HTTP</b> · TCP/IP</span>
+        <span><b>DNS</b> · packets</span>
+        <span><b>Git</b> · commits</span>
+        <span><b>SSH</b> · servers</span>
+        <span><b>RegExp</b> · patterns</span>
+        <span><b>Cron</b> · automation</span>
+        <span><b>Logs</b> · debugging</span>
+        <span><b>Curiosity</b> · 24/7</span>
+      </div>
+    </div>
+  </div>
+  <div class="tick rv">
+    <div class="tick-row rev">
+      <div class="tick-inner">
+        <span>HTML · CSS</span>
+        <span>JavaScript</span>
+        <span>C · low-level</span>
+        <span>curl · ping · traceroute</span>
+        <span>nano · vim</span>
+        <span>apt · pacman</span>
+        <span>nginx · systemd</span>
+        <span>json · api</span>
+        <span>man pages</span>
+        <span>break · fix · learn</span>
+      </div>
+      <div class="tick-inner">
+        <span>HTML · CSS</span>
+        <span>JavaScript</span>
+        <span>C · low-level</span>
+        <span>curl · ping · traceroute</span>
+        <span>nano · vim</span>
+        <span>apt · pacman</span>
+        <span>nginx · systemd</span>
+        <span>json · api</span>
+        <span>man pages</span>
+        <span>break · fix · learn</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= STATS ================= -->
+  <section class="block wrap" id="stats">
+    <div class="stats">
+      <div class="stat rv" data-d="0">
+        <b><span class="cnt" data-count="13">0</span></b>
+        <p data-i18n="st1_l">публичных репозиториев</p>
+      </div>
+      <div class="stat rv" data-d="90">
+        <b><span class="cnt" data-count="4">0</span></b>
+        <p data-i18n="st2_l">языков программирования</p>
+      </div>
+      <div class="stat rv" data-d="180">
+        <b><span class="cnt" data-count="24">0</span><span class="suf">/7</span></b>
+        <p data-i18n="st3_l">часов в сутки за клавиатурой</p>
+      </div>
+      <div class="stat rv" data-d="270">
+        <b><span class="cnt" data-count="365">0</span></b>
+        <p data-i18n="st4_l">дней любопытства в году</p>
+      </div>
     </div>
   </section>
 
   <!-- ================= ABOUT ================= -->
   <section class="block wrap" id="about">
-    <h2 data-i18n="about_title">обо мне</h2>
-    <p class="lead" data-i18n="about_lead">пара слов о том, что меня заводит</p>
-    <div class="cards">
-      <div class="card"><span class="ico">🐍</span><h3 data-i18n="c1t">Python и структуры языков</h3><p data-i18n="c1d">разбираюсь, как устроены языки программирования, и пишу код на Python</p></div>
-      <div class="card"><span class="ico">🌐</span><h3 data-i18n="c2t">как работает интернет</h3><p data-i18n="c2d">серверы, протоколы, сети — хочу понять всё изнутри</p></div>
-      <div class="card"><span class="ico">🐧</span><h3 data-i18n="c3t">Linux</h3><p data-i18n="c3d">копаюсь в системе, терминале и автоматизации</p></div>
-      <div class="card"><span class="ico">⚡</span><h3 data-i18n="c4t">техника — моя стихия</h3><p data-i18n="c4d">всё, что связано с технологиями, изучаю с большим интересом</p></div>
+    <div class="sec-head rv">
+      <span class="sec-ico"><svg class="ic"><use href="#i-book"/></svg></span>
+      <h2 class="sec-t" data-i18n="ab_t">обо мне</h2>
+      <span class="sec-line"></span>
     </div>
+    <p class="sec-lead rv" data-i18n="ab_l">коротко и по делу: кто я, что делаю и куда иду</p>
+    <div class="cards6">
+      <div class="card rv" data-d="0">
+        <span class="card-ico"><svg class="ic"><use href="#i-code"/></svg></span>
+        <h3 data-i18n="ab1t">Python и структуры языков</h3>
+        <p data-i18n="ab1d">изучаю не просто синтаксис, а то, как языки устроены изнутри: типы, память, интерпретатор</p>
+      </div>
+      <div class="card rv" data-d="70">
+        <span class="card-ico"><svg class="ic"><use href="#i-globe"/></svg></span>
+        <h3 data-i18n="ab2t">как работает интернет</h3>
+        <p data-i18n="ab2d">DNS, HTTP, TCP/IP, серверы — мне интересна механика, а не только сайты</p>
+      </div>
+      <div class="card rv" data-d="140">
+        <span class="card-ico"><svg class="ic"><use href="#i-terminal"/></svg></span>
+        <h3 data-i18n="ab3t">Linux и терминал</h3>
+        <p data-i18n="ab3d">живу в консоли: bash, systemctl, cron, логи и бесконечные man-страницы</p>
+      </div>
+      <div class="card rv" data-d="210">
+        <span class="card-ico"><svg class="ic"><use href="#i-server"/></svg></span>
+        <h3 data-i18n="ab4t">серверы и сети</h3>
+        <p data-i18n="ab4d">поднимаю и ломаю серверы, чтобы понять, как они работают на самом деле</p>
+      </div>
+      <div class="card rv" data-d="280">
+        <span class="card-ico"><svg class="ic"><use href="#i-cpu"/></svg></span>
+        <h3 data-i18n="ab5t">железо и техника</h3>
+        <p data-i18n="ab5d">разбираюсь в устройстве техники: от материнской платы до прошивки</p>
+      </div>
+      <div class="card rv" data-d="350">
+        <span class="card-ico"><svg class="ic"><use href="#i-zap"/></svg></span>
+        <h3 data-i18n="ab6t">учёба каждый день</h3>
+        <p data-i18n="ab6d">новая тема каждую неделю — любопытство не выключается</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STACK ================= -->
+  <section class="block wrap" id="stack">
+    <div class="sec-head rv">
+      <span class="sec-ico"><svg class="ic"><use href="#i-layers"/></svg></span>
+      <h2 class="sec-t" data-i18n="sk_t">стек и навыки</h2>
+      <span class="sec-line"></span>
+    </div>
+    <p class="sec-lead rv" data-i18n="sk_l">честные проценты: subjective, но замеренные на практике</p>
+    <div class="stack-grid">
+      <div class="rv">
+        <div class="bar" data-w="75">
+          <div class="bar-top"><b data-i18n="sk_py">Python</b><span class="pct">0%</span></div>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+        </div>
+        <div class="bar" data-w="65">
+          <div class="bar-top"><b data-i18n="sk_linux">Linux / Bash</b><span class="pct">0%</span></div>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+        </div>
+        <div class="bar" data-w="55">
+          <div class="bar-top"><b data-i18n="sk_net">Сети и протоколы</b><span class="pct">0%</span></div>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+        </div>
+        <div class="bar" data-w="55">
+          <div class="bar-top"><b data-i18n="sk_git">Git</b><span class="pct">0%</span></div>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+        </div>
+        <div class="bar" data-w="60">
+          <div class="bar-top"><b data-i18n="sk_web">HTML / CSS</b><span class="pct">0%</span></div>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+        </div>
+        <div class="bar" data-w="45">
+          <div class="bar-top"><b data-i18n="sk_js">JavaScript</b><span class="pct">0%</span></div>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+        </div>
+      </div>
+      <div class="rv" data-d="120">
+        <p class="chips-title" data-i18n="sk_note">инструменты, которые живут у меня в терминале:</p>
+        <div class="chips">
+          <span class="chip2">bash</span>
+          <span class="chip2">zsh</span>
+          <span class="chip2">git</span>
+          <span class="chip2">ssh</span>
+          <span class="chip2">systemd</span>
+          <span class="chip2">cron</span>
+          <span class="chip2">curl</span>
+          <span class="chip2">wget</span>
+          <span class="chip2">ping</span>
+          <span class="chip2">traceroute</span>
+          <span class="chip2">dig</span>
+          <span class="chip2">netstat</span>
+          <span class="chip2">htop</span>
+          <span class="chip2">nano</span>
+          <span class="chip2">vim</span>
+          <span class="chip2">grep</span>
+          <span class="chip2">sed</span>
+          <span class="chip2">awk</span>
+          <span class="chip2">tar</span>
+          <span class="chip2">man</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROJECTS ================= -->
+  <section class="block wrap" id="projects">
+    <div class="sec-head rv">
+      <span class="sec-ico"><svg class="ic"><use href="#i-folder"/></svg></span>
+      <h2 class="sec-t" data-i18n="pr_t">мои проекты</h2>
+      <span class="sec-line"></span>
+    </div>
+    <p class="sec-lead rv" data-i18n="pr_l">все публичные репозитории с GitHub — от утилит до экспериментов</p>
+    <div class="filters rv">
+      <button class="fbtn on" type="button" data-f="all" data-i18n="f_all">все</button>
+      <button class="fbtn" type="button" data-f="python" data-i18n="f_python">python</button>
+      <button class="fbtn" type="button" data-f="javascript" data-i18n="f_js">javascript</button>
+      <button class="fbtn" type="button" data-f="html" data-i18n="f_html">html</button>
+      <button class="fbtn" type="button" data-f="c" data-i18n="f_c">c</button>
+      <button class="fbtn" type="button" data-f="other" data-i18n="f_other">другое</button>
+    </div>
+    <div class="pgrid">
+      <article class="pcard rv" data-lang="python" style="--c:#3572A5" data-d="0">
+        <span class="pnum">01</span>
+        <a class="pcard-link" href="https://github.com/prime41k/Syncio" target="_blank" rel="noopener">
+          <h3 class="pname">Syncio</h3>
+          <p class="pdesc" data-i18n="d_syncio">python-проект — детали в коде</p>
+          <div class="pfoot">
+            <span class="plang"><i></i>Python</span>
+            <span class="picon"><svg class="ic"><use href="#i-ext"/></svg></span>
+          </div>
+        </a>
+      </article>
+      <article class="pcard rv" data-lang="python" style="--c:#3572A5" data-d="60">
+        <span class="pnum">02</span>
+        <a class="pcard-link" href="https://github.com/prime41k/Typed" target="_blank" rel="noopener">
+          <h3 class="pname">Typed</h3>
+          <p class="pdesc" data-i18n="d_typed">делает Python более типизированным</p>
+          <div class="pfoot">
+            <span class="plang"><i></i>Python</span>
+            <span class="picon"><svg class="ic"><use href="#i-ext"/></svg></span>
+          </div>
+        </a>
+      </article>
+      <article class="pcard rv" data-lang="python" style="--c:#3572A5" data-d="120">
+        <span class="pnum">03</span>
+        <a class="pcard-link" href="https://github.com/prime41k/Catch" target="_blank" rel="noopener">
+          <h3 class="pname">Catch</h3>
+          <p class="pdesc" data-i18n="d_catch">SmartCatch — умный перехватчик ошибок Python</p>
+          <div class="pfoot">
+            <span class="plang"><i></i>Python</span>
+            <span class="picon"><svg class="ic"><use href="#i-ext"/></svg></span>
+          </div>
+        </a>
+      </article>
+      <article class="pcard rv" data-lang="python" style="--c:#3572A5" data-d="180">
+        <span class="pnum">04</span>
+        <a class="pcard-link" href="https://github.com/prime41k/Zss" target="_blank" rel="noopener">
+          <h3 class="pname">Zss</h3>
+          <p class="pdesc" data-i18n="d_zss">python-проект — детали в коде</p>
+          <div class="pfoot">
+            <span class="plang"><i></i>Python</span>
+            <span class="picon"><svg class="ic"><use href="#i-ext"/></svg></span>
+          </div>
+        </a>
+      </article>
+      <article class="pcard rv" data-lang="python" style="--c:#3572A5" data-d="240">
+        <span class="pnum">05</span>
+        <a class="pcard-link" href="https://github.com/prime41k/Hiro-userbot" target="_blank" rel="noopener">
+          <h3 class="pname">Hiro-userbot</h3>
+          <p class="pdesc" data-i18n="d_hiro">юзербот для Telegram на Python</p>
+          <div class="pfoot">
+            <span class="plang"><i></i>Python</span>
+            <span class="picon"><svg class="ic"><use href="#i-ext"/></svg></span>
+          </div>
+        </a>
+      </article>
+      <article class="pcard rv" data-lang="python" style="--c:#3572A5" data-d="300">
+        <span class="pnum">06</span>
+        <a class="pcard-link" href="https://github.com/prime41k/Nonnne" target="_blank" rel="noopener">
+          <h3 class="pname">Nonnne</h3>
+          <p class="pdesc" data-i18n="d_nonnne">python-проект — детали в коде</p>
+          <div class="pfoot">
+            <span class="plang"><i></i>Python</span>
+            <span class="picon"><svg class="ic"><use href="#i-ext"/></svg></span>
+          </div>
+        </a>
+      </article>
+      <article class="pcard rv" data-lang="python" style="--c:#3572A5" data-d="0">
+        <span class="pnum">07</span>
+        <a class="pcard-link" href="https://github.com/prime41k/primix-backend-language-" target="_blank" rel="noopener">
+          <h3 class="pname">primix-backend-language-</h3>
+          <p class="pdesc" data-i18n="d_primix">экспериментальный бэкенд-язык — ранние наброски</p>
+          <div class="pfoot">
+            <span class="plang"><i></i>Python</span>
+            <span class="picon"><svg class="ic"><use href="#i-ext"/></svg></span>
+          </div>
+        </a>
+      </article>
+      <article class="pcard rv" data-lang="javascript" style="--c:#f1e05a" data-d="60">
+        <span class="pnum">08</span>
+        <a class="pcard-link" href="https://github.com/prime41k/PYtos" target="_blank" rel="noopener">
+          <h3 class="pname">PYtos</h3>
+          <p class="pdesc" data-i18n="d_pytos">javascript-проект — детали в коде</p>
+          <div class="pfoot">
+            <span class="plang"><i></i>JavaScript</span>
+            <span class="picon"><svg class="ic"><use href="#i-ext"/></svg></span>
+          </div>
+        </a>
+      </article>
+      <article class="pcard rv" data-lang="javascript" style="--c:#f1e05a" data-d="120">
+        <span class="pnum">09</span>
+        <a class="pcard-link" href="https://github.com/prime41k/Os" target="_blank" rel="noopener">
+          <h3 class="pname">Os</h3>
+          <p class="pdesc" data-i18n="d_os">описание в репо — «хз», но код настоящий</p>
+          <div class="pfoot">
+            <span class="plang"><i></i>JavaScript</span>
+            <span class="picon"><svg class="ic"><use href="#i-ext"/></svg></span>
+          </div>
+        </a>
+      </article>
+      <article class="pcard rv" data-lang="other" style="--c:#8fa39a" data-d="180">
+        <span class="pnum">10</span>
+        <a class="pcard-link" href="https://github.com/prime41k/zsgram" target="_blank" rel="noopener">
+          <h3 class="pname">zsgram</h3>
+          <p class="pdesc" data-i18n="d_zsgram">проект — подробности в коде</p>
+          <div class="pfoot">
+            <span class="plang"><i></i>code</span>
+            <span class="picon"><svg class="ic"><use href="#i-ext"/></svg></span>
+          </div>
+        </a>
+      </article>
+      <article class="pcard rv" data-lang="c" style="--c:#8fa3b8" data-d="240">
+        <span class="pnum">11</span>
+        <a class="pcard-link" href="https://github.com/prime41k/novaOS" target="_blank" rel="noopener">
+          <h3 class="pname">novaOS</h3>
+          <p class="pdesc" data-i18n="d_nova">эксперименты с ОС на чистом C</p>
+          <div class="pfoot">
+            <span class="plang"><i></i>C</span>
+            <span class="picon"><svg class="ic"><use href="#i-ext"/></svg></span>
+          </div>
+        </a>
+      </article>
+      <article class="pcard rv" data-lang="html" style="--c:#e34c26" data-d="300">
+        <span class="pnum">12</span>
+        <a class="pcard-link" href="https://github.com/prime41k/pyos-" target="_blank" rel="noopener">
+          <h3 class="pname">pyos-</h3>
+          <p class="pdesc" data-i18n="d_pyos">pyos — веб-страничка</p>
+          <div class="pfoot">
+            <span class="plang"><i></i>HTML</span>
+            <span class="picon"><svg class="ic"><use href="#i-ext"/></svg></span>
+          </div>
+        </a>
+      </article>
+      <article class="pcard rv" data-lang="html" style="--c:#e34c26" data-d="360">
+        <span class="pnum">13</span>
+        <a class="pcard-link" href="https://github.com/prime41k/Ryan-site" target="_blank" rel="noopener">
+          <h3 class="pname">Ryan-site</h3>
+          <p class="pdesc" data-i18n="d_ryansite">этот сайт — тёмный, RU/EN, весь на анимациях</p>
+          <div class="pfoot">
+            <span class="plang"><i></i>HTML</span>
+            <span class="picon"><svg class="ic"><use href="#i-ext"/></svg></span>
+          </div>
+        </a>
+      </article>
+    </div>
+    <p class="pr-note rv">
+      <svg class="ic"><use href="#i-branch"/></svg>
+      <span data-i18n="pr_note">плюс несколько приватных экспериментов, которые дозреют и станут публичными</span>
+    </p>
   </section>
 
   <!-- ================= PLAYGROUND ================= -->
   <section class="block wrap" id="playground">
-    <h2 data-i18n="play_title">плейграунд</h2>
-    <p class="lead" data-i18n="play_lead">немного интерактива: потаскай вершины треугольника и покрути волну слайдерами</p>
+    <div class="sec-head rv">
+      <span class="sec-ico"><svg class="ic"><use href="#i-activity"/></svg></span>
+      <h2 class="sec-t" data-i18n="pg_t">плейграунд</h2>
+      <span class="sec-line"></span>
+    </div>
+    <p class="sec-lead rv" data-i18n="pg_l">интерактив в чистом виде: тяни, крути, смотри на цифры</p>
     <div class="grid2">
-      <div class="panel">
-        <h3 data-i18n="drag_title">живые вершины</h3>
-        <p class="plead" data-i18n="drag_lead">тяни точки — координаты, площадь и периметр считаются на лету</p>
+      <div class="panel rv">
+        <span class="pidx">01 / geometry</span>
+        <h3 data-i18n="dr_t">живые вершины</h3>
+        <p class="plead" data-i18n="dr_l">тяни точки A, B, C — координаты, площадь и периметр пересчитываются на лету</p>
         <svg id="dragSvg" viewBox="0 0 360 260">
           <defs>
             <pattern id="gpat" width="24" height="24" patternUnits="userSpaceOnUse">
@@ -237,385 +2222,1153 @@ footer{margin-top:90px;border-top:1px solid var(--line);padding:26px 0 34px;colo
           <span class="chip"><span data-i18n="ro_perim">периметр</span>: <b id="roPerim"></b></span>
         </div>
       </div>
-      <div class="panel">
-        <h3 data-i18n="wave_title">волна на слайдерах</h3>
-        <p class="plead" data-i18n="wave_lead">y = A·sin(f·x + t·v) — двигай слайдеры и смотри, что меняется</p>
+      <div class="panel rv" data-d="120">
+        <span class="pidx">02 / signal</span>
+        <h3 data-i18n="wv_t">волна на слайдерах</h3>
+        <p class="plead" data-i18n="wv_l">y = A·sin(f·x + t·v) — двигай ползунки и наблюдай</p>
         <div class="wave-box"><canvas id="waveCanvas" height="220"></canvas></div>
         <div class="sliders">
-          <label class="sl"><span data-i18n="s_amp">амплитуда A</span><input id="sAmp" type="range" min="5" max="90" value="42"><span class="val" id="vAmp">42</span></label>
-          <label class="sl"><span data-i18n="s_freq">частота f</span><input id="sFreq" type="range" min="1" max="10" value="3"><span class="val" id="vFreq">3</span></label>
-          <label class="sl"><span data-i18n="s_speed">скорость v</span><input id="sSpd" type="range" min="0" max="3" step="0.1" value="1"><span class="val" id="vSpd">1.0</span></label>
+          <label class="sl">
+            <span data-i18n="wv_amp">амплитуда A</span>
+            <input id="sAmp" type="range" min="5" max="90" value="42">
+            <span class="val" id="vAmp">42</span>
+          </label>
+          <label class="sl">
+            <span data-i18n="wv_freq">частота f</span>
+            <input id="sFreq" type="range" min="1" max="10" value="3">
+            <span class="val" id="vFreq">3</span>
+          </label>
+          <label class="sl">
+            <span data-i18n="wv_speed">скорость v</span>
+            <input id="sSpd" type="range" min="0" max="3" step="0.1" value="1">
+            <span class="val" id="vSpd">1.0</span>
+          </label>
         </div>
         <p class="eq" id="waveEq"></p>
       </div>
     </div>
   </section>
 
-  <!-- ================= QUIZ ================= -->
-  <section class="block wrap" id="quiz">
-    <h2 data-i18n="quiz_title">насколько ты меня знаешь?</h2>
-    <p class="lead" data-i18n="quiz_lead">4 вопроса — отвечай, и карточка вспыхнет зелёным или красным</p>
-    <div class="scoreline">
-      <span id="quizScore"></span>
-      <span id="quizDone" hidden data-i18n="quiz_done">квиз пройден 🎉</span>
-    </div>
-    <div id="quizCards"></div>
-  </section>
-
   <!-- ================= PATH ================= -->
   <section class="block wrap" id="path">
-    <h2 data-i18n="path_title">мой путь</h2>
-    <p class="lead" data-i18n="path_lead">раскрывай шаг за шагом ↓</p>
-    <div class="dots" id="pathDots"></div>
-    <div id="pathList"></div>
-    <div class="pathbtns">
-      <button id="pathBtn" class="btn primary small"></button>
-      <button id="pathReset" class="btn ghost small"></button>
+    <div class="sec-head rv">
+      <span class="sec-ico"><svg class="ic"><use href="#i-clock"/></svg></span>
+      <h2 class="sec-t" data-i18n="pt_t">мой путь</h2>
+      <span class="sec-line"></span>
+    </div>
+    <p class="sec-lead rv" data-i18n="pt_l">от первого «как это работает?» до собственных проектов</p>
+    <div class="tl">
+      <div class="tl-item rv">
+        <span class="tl-dot"><i></i></span>
+        <div class="tl-body">
+          <span class="tl-step">STEP 01</span>
+          <h4 data-i18n="p1t">искра</h4>
+          <p data-i18n="p1d">первый компьютер и бесконечные вопросы «а как это устроено внутри?»</p>
+        </div>
+      </div>
+      <div class="tl-item rv" data-d="60">
+        <span class="tl-dot"><i></i></span>
+        <div class="tl-body">
+          <span class="tl-step">STEP 02</span>
+          <h4 data-i18n="p2t">первые строчки кода</h4>
+          <p data-i18n="p2d">открыл Python — и понеслось: скрипты, ошибки, снова скрипты</p>
+        </div>
+      </div>
+      <div class="tl-item rv" data-d="120">
+        <span class="tl-dot"><i></i></span>
+        <div class="tl-body">
+          <span class="tl-step">STEP 03</span>
+          <h4 data-i18n="p3t">механика интернета</h4>
+          <p data-i18n="p3d">DNS, HTTP, TCP: перестал видеть «сайты», начал видеть «системы»</p>
+        </div>
+      </div>
+      <div class="tl-item rv" data-d="180">
+        <span class="tl-dot"><i></i></span>
+        <div class="tl-body">
+          <span class="tl-step">STEP 04</span>
+          <h4 data-i18n="p4t">Linux</h4>
+          <p data-i18n="p4d">терминал стал домом: bash, systemd, cron и логи вместо сериалов</p>
+        </div>
+      </div>
+      <div class="tl-item rv" data-d="240">
+        <span class="tl-dot"><i></i></span>
+        <div class="tl-body">
+          <span class="tl-step">STEP 05</span>
+          <h4 data-i18n="p5t">свои репозитории</h4>
+          <p data-i18n="p5d">выкладываю эксперименты и утилиты на GitHub — код растёт</p>
+        </div>
+      </div>
+      <div class="tl-item rv" data-d="300">
+        <span class="tl-dot"><i></i></span>
+        <div class="tl-body">
+          <span class="tl-step">STEP 06</span>
+          <h4 data-i18n="p6t">железо и автоматизация</h4>
+          <p data-i18n="p6d">разбираюсь в системах, прошивках и том, как всё связано между собой</p>
+        </div>
+      </div>
+      <div class="tl-item rv" data-d="360">
+        <span class="tl-dot"><i></i></span>
+        <div class="tl-body">
+          <span class="tl-step">STEP 07</span>
+          <h4 data-i18n="p7t">что дальше</h4>
+          <p data-i18n="p7d">свой мини-язык, больше проектов и телеграм-канал — coming soon</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LEARNING NOW ================= -->
+  <section class="block wrap" id="now">
+    <div class="sec-head rv">
+      <span class="sec-ico"><svg class="ic"><use href="#i-target"/></svg></span>
+      <h2 class="sec-t" data-i18n="nw_t">сейчас прокачиваю</h2>
+      <span class="sec-line"></span>
+    </div>
+    <p class="sec-lead rv" data-i18n="nw_l">темы, которые жру прямо сейчас — проценты растут каждую неделю</p>
+    <div class="rings">
+      <div class="ring-card rv" data-p="70" data-d="0" style="--rc:var(--green)">
+        <div class="ring-wrap">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fg" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="ring-num"><span class="rnum">0</span><i>%</i></div>
+        </div>
+        <p data-i18n="nw1l">структуры языков</p>
+      </div>
+      <div class="ring-card rv" data-p="60" data-d="70" style="--rc:var(--mint)">
+        <div class="ring-wrap">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fg" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="ring-num"><span class="rnum">0</span><i>%</i></div>
+        </div>
+        <p data-i18n="nw2l">HTTP и серверы</p>
+      </div>
+      <div class="ring-card rv" data-p="50" data-d="140" style="--rc:var(--pink)">
+        <div class="ring-wrap">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fg" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="ring-num"><span class="rnum">0</span><i>%</i></div>
+        </div>
+        <p data-i18n="nw3l">сетевые протоколы</p>
+      </div>
+      <div class="ring-card rv" data-p="45" data-d="210" style="--rc:var(--lav)">
+        <div class="ring-wrap">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fg" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="ring-num"><span class="rnum">0</span><i>%</i></div>
+        </div>
+        <p data-i18n="nw4l">автоматизация bash</p>
+      </div>
+      <div class="ring-card rv" data-p="40" data-d="280" style="--rc:var(--sky)">
+        <div class="ring-wrap">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fg" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="ring-num"><span class="rnum">0</span><i>%</i></div>
+        </div>
+        <p data-i18n="nw5l">регулярные выражения</p>
+      </div>
+      <div class="ring-card rv" data-p="55" data-d="350" style="--rc:var(--green2)">
+        <div class="ring-wrap">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fg" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="ring-num"><span class="rnum">0</span><i>%</i></div>
+        </div>
+        <p data-i18n="nw6l">английский</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FACTS ================= -->
+  <section class="block wrap" id="facts">
+    <div class="sec-head rv">
+      <span class="sec-ico"><svg class="ic"><use href="#i-help"/></svg></span>
+      <h2 class="sec-t" data-i18n="fc_t">факты обо мне</h2>
+      <span class="sec-line"></span>
+    </div>
+    <p class="sec-lead rv" data-i18n="fc_l">разверни то, что интересно</p>
+    <div class="acc">
+      <div class="acc-item rv" data-d="0">
+        <button class="acc-q" type="button">
+          <span data-i18n="q1">почему ник rayan41k?</span>
+          <svg class="ic"><use href="#i-chev"/></svg>
+        </button>
+        <div class="acc-a"><p data-i18n="a1">ник собрался сам: rayan + 41k — звучит как хэндл из мира кода. Расшифровку «41k» оставляю как пасхалку для внимательных.</p></div>
+      </div>
+      <div class="acc-item rv" data-d="60">
+        <button class="acc-q" type="button">
+          <span data-i18n="q2">что мне интереснее всего в интернете?</span>
+          <svg class="ic"><use href="#i-chev"/></svg>
+        </button>
+        <div class="acc-a"><p data-i18n="a2">не сайты, а то, что под капотом: DNS-запросы, TCP-пакеты, маршруты и серверы, которые всё это склеивают.</p></div>
+      </div>
+      <div class="acc-item rv" data-d="120">
+        <button class="acc-q" type="button">
+          <span data-i18n="q3">любимый инструмент?</span>
+          <svg class="ic"><use href="#i-chev"/></svg>
+        </button>
+        <div class="acc-a"><p data-i18n="a3">терминал. минимализм, полный контроль и ощущение, что машина тебя слышит.</p></div>
+      </div>
+      <div class="acc-item rv" data-d="180">
+        <button class="acc-q" type="button">
+          <span data-i18n="q4">план на будущее?</span>
+          <svg class="ic"><use href="#i-chev"/></svg>
+        </button>
+        <div class="acc-a"><p data-i18n="a4">прокачать сети до глубин, написать свой мини-язык программирования и запустить телеграм-канал.</p></div>
+      </div>
+      <div class="acc-item rv" data-d="240">
+        <button class="acc-q" type="button">
+          <span data-i18n="q5">совет тем, кто только начинает?</span>
+          <svg class="ic"><use href="#i-chev"/></svg>
+        </button>
+        <div class="acc-a"><p data-i18n="a5">не бойся ломать: сломал — починил — понял. вся техника так и учится.</p></div>
+      </div>
     </div>
   </section>
 
   <!-- ================= CONTACT ================= -->
   <section class="block wrap" id="contact">
-    <h2 data-i18n="contact_title">контакты</h2>
-    <p class="lead" data-i18n="contact_lead">напиши мне — отвечу</p>
+    <div class="sec-head rv">
+      <span class="sec-ico"><svg class="ic"><use href="#i-send"/></svg></span>
+      <h2 class="sec-t" data-i18n="ct_t">контакты</h2>
+      <span class="sec-line"></span>
+    </div>
+    <p class="sec-lead rv" data-i18n="ct_l">самый быстрый способ связаться — Telegram</p>
     <div class="contact-grid">
-      <a class="btn primary" href="https://t.me/traxx05" target="_blank" rel="noopener"><span data-i18n="contact_tg">Telegram · @traxx05</span> ↗</a>
-      <a class="btn ghost" href="https://github.com/prime41k" target="_blank" rel="noopener"><span data-i18n="contact_gh">GitHub</span> ↗</a>
-      <button class="chip" id="copyTg" data-i18n="copy">скопировать ник</button>
-      <span class="soon" data-i18n="contact_soon">телеграм-канал — coming soon</span>
+      <div class="ct-card rv">
+        <h3 data-i18n="ct_big">открыт к общению, вопросам и совместным экспериментам</h3>
+        <div class="cta">
+          <a class="btn primary mag" href="https://t.me/traxx05" target="_blank" rel="noopener">
+            <svg class="ic"><use href="#i-send"/></svg>
+            <span data-i18n="ct_tg">Telegram · @traxx05</span>
+          </a>
+          <a class="btn ghost mag" href="https://github.com/prime41k" target="_blank" rel="noopener">
+            <svg class="ic"><use href="#i-branch"/></svg>
+            <span data-i18n="ct_gh">GitHub · prime41k</span>
+          </a>
+        </div>
+        <div class="ct-chips">
+          <button class="chip" id="copyTg" type="button" data-i18n="copy">скопировать ник</button>
+          <span class="soon" data-i18n="ct_soon">телеграм-канал — coming soon</span>
+        </div>
+      </div>
+      <div class="term rv" data-d="120">
+        <div class="term-bar">
+          <i></i><i></i><i></i>
+          <span data-i18n="term_title">rayan41k@france: ~</span>
+        </div>
+        <div class="term-body" id="termBody"></div>
+      </div>
     </div>
   </section>
 </main>
 
-<footer><div class="wrap"><span data-i18n="footer">сделано с ♥ и любопытством · rayan41k</span></div></footer>
+<!-- ================= FOOTER ================= -->
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span class="ft-made">
+      <span data-i18n="ft_made">сделано с</span>
+      <span class="heart"><svg class="ic"><use href="#i-heart"/></svg></span>
+      <span data-i18n="ft_cur">и любопытством</span>
+    </span>
+    <span>
+      © <span id="yr">2025</span> rayan41k
+      <span class="ver">· v2.0 · single-file · no deps</span>
+    </span>
+  </div>
+</footer>
+
+<button id="btt" class="btt" type="button" aria-label="back to top">
+  <svg class="ic"><use href="#i-up"/></svg>
+</button>
+
+<!-- ================= SVG ICON SPRITE ================= -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+  <symbol id="i-activity" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></symbol>
+  <symbol id="i-branch" viewBox="0 0 24 24"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path style="fill:currentColor;stroke:none" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></symbol>
+</svg>
 
 <script>
 (() => {
 "use strict";
+/* ============================================================
+   rayan41k · site engine v2
+   01 helpers & i18n
+   02 preloader / progress / nav
+   03 custom cursor
+   04 particles background
+   05 morphing hero shape
+   06 glitch age
+   07 typewriter
+   08 reveal & counters & bars & rings
+   09 drag vertices
+   10 slider wave
+   11 projects: filters / tilt
+   12 magnetic buttons & ripple
+   13 facts accordion
+   14 terminal typing
+   15 matrix mode (button + konami + logo)
+   16 misc (copy, year, back-to-top, glitch)
+   ============================================================ */
+
+/* ---------- 01 helpers & i18n ---------- */
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
+document.documentElement.classList.add("js");
 
-/* ================= i18n ================= */
 const DICT = {
 ru:{
- nav_about:"обо мне",nav_play:"плейграунд",nav_quiz:"квиз",nav_path:"путь",nav_contact:"контакты",
- hero_hi:"привет, я",hero_from:"из Франции",age_label:"возраст:",
- hero_status:"«каждый день узнаю что-то новое»",
- btn_tg:"написать в Telegram",btn_play:"плейграунд ↓",
- about_title:"обо мне",about_lead:"пара слов о том, что меня заводит",
- c1t:"Python и структуры языков",c1d:"разбираюсь, как устроены языки программирования, и пишу код на Python",
- c2t:"как работает интернет",c2d:"серверы, протоколы, сети — хочу понять всё изнутри",
- c3t:"Linux",c3d:"копаюсь в системе, терминале и автоматизации",
- c4t:"техника — моя стихия",c4d:"всё, что связано с технологиями, изучаю с большим интересом",
- play_title:"плейграунд",play_lead:"немного интерактива: потаскай вершины треугольника и покрути волну слайдерами",
- drag_title:"живые вершины",drag_lead:"тяни точки — координаты, площадь и периметр считаются на лету",
- ro_hint:"← тяни меня",ro_area:"площадь",ro_perim:"периметр",ro_px2:"px²",ro_px:"px",
- wave_title:"волна на слайдерах",wave_lead:"y = A·sin(f·x + t·v) — двигай слайдеры и смотри, что меняется",
- s_amp:"амплитуда A",s_freq:"частота f",s_speed:"скорость v",
- quiz_title:"насколько ты меня знаешь?",quiz_lead:"4 вопроса — отвечай, и карточка вспыхнет зелёным или красным",
- quiz_score:"счёт",quiz_done:"квиз пройден 🎉",
- quiz_qs:[
-  {q:"где я живу?",opts:["в Германии","во Франции","в России","в Бразилии"],a:1},
-  {q:"что я сейчас активно изучаю?",opts:["кулинарию","Python, серверы и Linux","балет","астрологию"],a:1},
-  {q:"как меня найти в Telegram?",opts:["@traxx05","@rayan_main","@rayan41k_official","нигде"],a:0},
-  {q:"что я люблю больше всего?",opts:["смотреть в стену","учиться чему-то новому","собирать наклейки","ждать понедельник"],a:1}
- ],
- path_title:"мой путь",path_lead:"раскрывай шаг за шагом ↓",
- path_next:"раскрыть следующий шаг",path_done:"всё раскрыто ✓",path_reset:"↺ сбросить",
- path_steps:[
-  {t:"искра",d:"загорелся техникой — хотелось понять, как всё это работает"},
-  {t:"python",d:"начал изучать Python и разбираться в структурах языков"},
-  {t:"интернет",d:"пошёл глубже: серверы, сети, протоколы — как устроен интернет изнутри"},
-  {t:"linux",d:"осваиваю Linux: терминал, система, автоматизация"},
-  {t:"что дальше",d:"свои проекты и, возможно, телеграм-канал — coming soon…"}
- ],
- contact_title:"контакты",contact_lead:"напиши мне — отвечу",
- contact_tg:"Telegram · @traxx05",contact_gh:"GitHub",
- contact_soon:"телеграм-канал — coming soon",
+ n_about:"обо мне",n_stack:"стек",n_projects:"проекты",n_play:"плейграунд",n_path:"путь",n_now:"сейчас учу",n_facts:"факты",n_contact:"контакты",
+ h_hi:"привет, я",h_age_label:"возраст:",h_from:"из Франции",h_status:"онлайн",
+ h_cta_tg:"написать в Telegram",h_cta_play:"плейграунд",h_scroll:"скролль вниз",
+ st1_l:"публичных репозиториев",st2_l:"языков программирования",st3_l:"часов в сутки за клавиатурой",st4_l:"дней любопытства в году",
+ ab_t:"обо мне",ab_l:"коротко и по делу: кто я, что делаю и куда иду",
+ ab1t:"Python и структуры языков",ab1d:"изучаю не просто синтаксис, а то, как языки устроены изнутри: типы, память, интерпретатор",
+ ab2t:"как работает интернет",ab2d:"DNS, HTTP, TCP/IP, серверы — мне интересна механика, а не только сайты",
+ ab3t:"Linux и терминал",ab3d:"живу в консоли: bash, systemctl, cron, логи и бесконечные man-страницы",
+ ab4t:"серверы и сети",ab4d:"поднимаю и ломаю серверы, чтобы понять, как они работают на самом деле",
+ ab5t:"железо и техника",ab5d:"разбираюсь в устройстве техники: от материнской платы до прошивки",
+ ab6t:"учёба каждый день",ab6d:"новая тема каждую неделю — любопытство не выключается",
+ sk_t:"стек и навыки",sk_l:"честные проценты: subjective, но замеренные на практике",
+ sk_py:"Python",sk_linux:"Linux / Bash",sk_net:"Сети и протоколы",sk_git:"Git",sk_web:"HTML / CSS",sk_js:"JavaScript",
+ sk_note:"инструменты, которые живут у меня в терминале:",
+ pr_t:"мои проекты",pr_l:"все публичные репозитории с GitHub — от утилит до экспериментов",
+ f_all:"все",f_python:"python",f_js:"javascript",f_html:"html",f_c:"c",f_other:"другое",
+ d_syncio:"python-проект — детали в коде",
+ d_typed:"делает Python более типизированным",
+ d_catch:"SmartCatch — умный перехватчик ошибок Python",
+ d_zss:"python-проект — детали в коде",
+ d_hiro:"юзербот для Telegram на Python",
+ d_nonnne:"python-проект — детали в коде",
+ d_primix:"экспериментальный бэкенд-язык — ранние наброски",
+ d_pytos:"javascript-проект — детали в коде",
+ d_os:"описание в репо — «хз», но код настоящий",
+ d_zsgram:"проект — подробности в коде",
+ d_nova:"эксперименты с ОС на чистом C",
+ d_pyos:"pyos — веб-страничка",
+ d_ryansite:"этот сайт — тёмный, RU/EN, весь на анимациях",
+ pr_note:"плюс несколько приватных экспериментов, которые дозреют и станут публичными",
+ pg_t:"плейграунд",pg_l:"интерактив в чистом виде: тяни, крути, смотри на цифры",
+ dr_t:"живые вершины",dr_l:"тяни точки A, B, C — координаты, площадь и периметр пересчитываются на лету",
+ ro_area:"площадь",ro_perim:"периметр",ro_px2:"px²",ro_px:"px",ro_hint:"← тяни меня",
+ wv_t:"волна на слайдерах",wv_l:"y = A·sin(f·x + t·v) — двигай ползунки и наблюдай",
+ wv_amp:"амплитуда A",wv_freq:"частота f",wv_speed:"скорость v",
+ pt_t:"мой путь",pt_l:"от первого «как это работает?» до собственных проектов",
+ p1t:"искра",p1d:"первый компьютер и бесконечные вопросы «а как это устроено внутри?»",
+ p2t:"первые строчки кода",p2d:"открыл Python — и понеслось: скрипты, ошибки, снова скрипты",
+ p3t:"механика интернета",p3d:"DNS, HTTP, TCP: перестал видеть «сайты», начал видеть «системы»",
+ p4t:"Linux",p4d:"терминал стал домом: bash, systemd, cron и логи вместо сериалов",
+ p5t:"свои репозитории",p5d:"выкладываю эксперименты и утилиты на GitHub — код растёт",
+ p6t:"железо и автоматизация",p6d:"разбираюсь в системах, прошивках и том, как всё связано между собой",
+ p7t:"что дальше",p7d:"свой мини-язык, больше проектов и телеграм-канал — coming soon",
+ nw_t:"сейчас прокачиваю",nw_l:"темы, которые жру прямо сейчас — проценты растут каждую неделю",
+ nw1l:"структуры языков",nw2l:"HTTP и серверы",nw3l:"сетевые протоколы",nw4l:"автоматизация bash",nw5l:"регулярные выражения",nw6l:"английский",
+ fc_t:"факты обо мне",fc_l:"разверни то, что интересно",
+ q1:"почему ник rayan41k?",
+ a1:"ник собрался сам: rayan + 41k — звучит как хэндл из мира кода. Расшифровку «41k» оставляю как пасхалку для внимательных.",
+ q2:"что мне интереснее всего в интернете?",
+ a2:"не сайты, а то, что под капотом: DNS-запросы, TCP-пакеты, маршруты и серверы, которые всё это склеивают.",
+ q3:"любимый инструмент?",
+ a3:"терминал. минимализм, полный контроль и ощущение, что машина тебя слышит.",
+ q4:"план на будущее?",
+ a4:"прокачать сети до глубин, написать свой мини-язык программирования и запустить телеграм-канал.",
+ q5:"совет тем, кто только начинает?",
+ a5:"не бойся ломать: сломал — починил — понял. вся техника так и учится.",
+ ct_t:"контакты",ct_l:"самый быстрый способ связаться — Telegram",
+ ct_big:"открыт к общению, вопросам и совместным экспериментам",
+ ct_tg:"Telegram · @traxx05",ct_gh:"GitHub · prime41k",
  copy:"скопировать ник",copied:"скопировано ✓",
- footer:"сделано с ♥ и любопытством · rayan41k"
+ ct_soon:"телеграм-канал — coming soon",term_title:"rayan41k@france: ~",
+ ft_made:"сделано с",ft_cur:"и любопытством",
+ typer:[
+  "изучаю Python и структуры языков",
+  "копаю в том, как работает интернет",
+  "живу в терминале Linux",
+  "собираю собственные проекты",
+  "каждый день узнаю что-то новое"
+ ],
+ term:[
+  "$ whoami",
+  "rayan41k — из Франции, живу в коде",
+  "$ cat status.txt",
+  "python · серверы · linux · любопытство",
+  "$ ping -c 1 rayan41k.dev",
+  "pong · 1ms · онлайн",
+  "$ ./launch_channel.sh",
+  "телеграм-канал — coming soon…"
+ ]
 },
 en:{
- nav_about:"about",nav_play:"playground",nav_quiz:"quiz",nav_path:"path",nav_contact:"contact",
- hero_hi:"hey, i'm",hero_from:"from France",age_label:"age:",
- hero_status:"\u201clearning something new every day\u201d",
- btn_tg:"message me on Telegram",btn_play:"playground \u2193",
- about_title:"about me",about_lead:"a few words about what drives me",
- c1t:"Python & language structures",c1d:"digging into how programming languages work and writing Python code",
- c2t:"how the internet works",c2d:"servers, protocols, networks \u2014 I want to understand it all from the inside",
- c3t:"Linux",c3d:"exploring the system, the terminal and automation",
- c4t:"tech is my element",c4d:"anything related to technology, I study with big interest",
- play_title:"playground",play_lead:"a bit of interactivity: drag the triangle vertices, spin the wave with sliders",
- drag_title:"live vertices",drag_lead:"drag the points \u2014 coordinates, area and perimeter are computed live",
- ro_hint:"\u2190 drag me",ro_area:"area",ro_perim:"perimeter",ro_px2:"px\u00b2",ro_px:"px",
- wave_title:"slider wave",wave_lead:"y = A\u00b7sin(f\u00b7x + t\u00b7v) \u2014 move the sliders and watch it change",
- s_amp:"amplitude A",s_freq:"frequency f",s_speed:"speed v",
- quiz_title:"how well do you know me?",quiz_lead:"4 questions \u2014 the card flashes green or red on your answer",
- quiz_score:"score",quiz_done:"quiz complete \ud83c\udf89",
- quiz_qs:[
-  {q:"where do I live?",opts:["Germany","France","Russia","Brazil"],a:1},
-  {q:"what am I actively learning right now?",opts:["cooking","Python, servers & Linux","ballet","astrology"],a:1},
-  {q:"where can you find me on Telegram?",opts:["@traxx05","@rayan_main","@rayan41k_official","nowhere"],a:0},
-  {q:"what do I love the most?",opts:["staring at a wall","learning new things","collecting stickers","waiting for Monday"],a:1}
+ n_about:"about",n_stack:"stack",n_projects:"projects",n_play:"playground",n_path:"path",n_now:"learning now",n_facts:"facts",n_contact:"contact",
+ h_hi:"hey, i'm",h_age_label:"age:",h_from:"from France",h_status:"online",
+ h_cta_tg:"message me on Telegram",h_cta_play:"playground",h_scroll:"scroll down",
+ st1_l:"public repositories",st2_l:"programming languages",st3_l:"hours a day at the keyboard",st4_l:"days of curiosity a year",
+ ab_t:"about me",ab_l:"short and honest: who I am, what I do and where I'm heading",
+ ab1t:"Python & language structures",ab1d:"not just syntax — how languages work inside: types, memory, the interpreter",
+ ab2t:"how the internet works",ab2d:"DNS, HTTP, TCP/IP, servers — the mechanics, not just the websites",
+ ab3t:"Linux & terminal",ab3d:"I live in the console: bash, systemctl, cron, logs and endless man pages",
+ ab4t:"servers & networks",ab4d:"I raise and break servers to understand how they really work",
+ ab5t:"hardware & tech",ab5d:"from the motherboard to firmware — I take tech apart in my head",
+ ab6t:"learning every day",ab6d:"a new topic every week — curiosity never sleeps",
+ sk_t:"stack & skills",sk_l:"honest percentages: subjective, but measured in practice",
+ sk_py:"Python",sk_linux:"Linux / Bash",sk_net:"Networks & protocols",sk_git:"Git",sk_web:"HTML / CSS",sk_js:"JavaScript",
+ sk_note:"tools that live in my terminal:",
+ pr_t:"my projects",pr_l:"all public GitHub repositories — from utilities to experiments",
+ f_all:"all",f_python:"python",f_js:"javascript",f_html:"html",f_c:"c",f_other:"other",
+ d_syncio:"a python project — details in the code",
+ d_typed:"makes Python more typed",
+ d_catch:"SmartCatch — smart Python exception catching",
+ d_zss:"a python project — details in the code",
+ d_hiro:"a Telegram userbot written in Python",
+ d_nonnne:"a python project — details in the code",
+ d_primix:"an experimental backend language — early sketches",
+ d_pytos:"a javascript project — details in the code",
+ d_os:"repo says “idk” — but the code is real",
+ d_zsgram:"a project — details in the code",
+ d_nova:"OS experiments in pure C",
+ d_pyos:"pyos — a little web page",
+ d_ryansite:"this very site — dark, RU/EN, fully animated",
+ pr_note:"plus a few private experiments that will ripen and go public",
+ pg_t:"playground",pg_l:"pure interactivity: drag, spin, watch the numbers",
+ dr_t:"live vertices",dr_l:"drag points A, B, C — coordinates, area and perimeter update in real time",
+ ro_area:"area",ro_perim:"perimeter",ro_px2:"px²",ro_px:"px",ro_hint:"← drag me",
+ wv_t:"slider wave",wv_l:"y = A·sin(f·x + t·v) — move the sliders and watch",
+ wv_amp:"amplitude A",wv_freq:"frequency f",wv_speed:"speed v",
+ pt_t:"my path",pt_l:"from the first “how does it work?” to my own projects",
+ p1t:"the spark",p1d:"first computer and endless “but how does it work inside?” questions",
+ p2t:"first lines of code",p2d:"opened Python — and off it went: scripts, errors, more scripts",
+ p3t:"internet mechanics",p3d:"DNS, HTTP, TCP: stopped seeing “websites”, started seeing “systems”",
+ p4t:"Linux",p4d:"the terminal became home: bash, systemd, cron and logs instead of shows",
+ p5t:"own repositories",p5d:"publishing experiments and utilities on GitHub — the code grows",
+ p6t:"hardware & automation",p6d:"figuring out systems, firmware and how everything is wired together",
+ p7t:"what's next",p7d:"my own mini-language, more projects and a Telegram channel — coming soon",
+ nw_t:"leveling up now",nw_l:"topics I'm consuming right now — the percentages grow weekly",
+ nw1l:"language structures",nw2l:"HTTP & servers",nw3l:"network protocols",nw4l:"bash automation",nw5l:"regular expressions",nw6l:"english",
+ fc_t:"facts about me",fc_l:"expand what interests you",
+ q1:"why the nickname rayan41k?",
+ a1:"the handle came together naturally: rayan + 41k — sounds like it's straight out of the coding world. The meaning of “41k” stays an easter egg for the attentive.",
+ q2:"what fascinates you about the internet?",
+ a2:"not the sites — what's under the hood: DNS queries, TCP packets, routes and the servers gluing it all together.",
+ q3:"favorite tool?",
+ a3:"the terminal. minimalism, full control, and the feeling that the machine hears you.",
+ q4:"plans for the future?",
+ a4:"take networking to the depths, write my own mini programming language and launch a Telegram channel.",
+ q5:"advice for beginners?",
+ a5:"don't be afraid to break things: break it — fix it — understand it. that's how all tech is learned.",
+ ct_t:"contact",ct_l:"the fastest way to reach me is Telegram",
+ ct_big:"open to chats, questions and joint experiments",
+ ct_tg:"Telegram · @traxx05",ct_gh:"GitHub · prime41k",
+ copy:"copy handle",copied:"copied ✓",
+ ct_soon:"telegram channel — coming soon",term_title:"rayan41k@france: ~",
+ ft_made:"made with",ft_cur:"and curiosity",
+ typer:[
+  "learning Python & language structures",
+  "digging into how the internet works",
+  "living inside the Linux terminal",
+  "building my own projects",
+  "learning something new every day"
  ],
- path_title:"my path",path_lead:"reveal it step by step \u2193",
- path_next:"reveal next step",path_done:"all revealed \u2713",path_reset:"\u21ba reset",
- path_steps:[
-  {t:"spark",d:"got hooked on tech and wanted to understand how everything works"},
-  {t:"python",d:"started learning Python and digging into language structures"},
-  {t:"internet",d:"went deeper: servers, networks, protocols \u2014 the internet from the inside"},
-  {t:"linux",d:"getting into Linux: terminal, the system, automation"},
-  {t:"what's next",d:"own projects and maybe a Telegram channel \u2014 coming soon\u2026"}
- ],
- contact_title:"contact",contact_lead:"write to me \u2014 I'll answer",
- contact_tg:"Telegram \u00b7 @traxx05",contact_gh:"GitHub",
- contact_soon:"telegram channel \u2014 coming soon",
- copy:"copy handle",copied:"copied \u2713",
- footer:"made with \u2665 and curiosity \u00b7 rayan41k"
+ term:[
+  "$ whoami",
+  "rayan41k — from France, living in code",
+  "$ cat status.txt",
+  "python · servers · linux · curiosity",
+  "$ ping -c 1 rayan41k.dev",
+  "pong · 1ms · online",
+  "$ ./launch_channel.sh",
+  "telegram channel — coming soon…"
+ ]
 }};
 
-let lang = 'ru';
-try{ lang = localStorage.getItem('rayan-lang') || 'ru'; }catch(e){}
-if(!DICT[lang]) lang='ru';
+let lang = "ru";
+try { lang = localStorage.getItem("rayan-lang") || "ru"; } catch (e) {}
+if (!DICT[lang]) lang = "ru";
 const t = k => (DICT[lang] && DICT[lang][k]) ?? DICT.en[k] ?? k;
 
-function applyLang(){
+function applyLang() {
   document.documentElement.lang = lang;
-  $$('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
-  $('#langBtn').textContent = lang==='ru' ? 'EN' : 'RU';
-  renderQuiz(); renderPath();
+  $$("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+  $("#langBtn").textContent = lang === "ru" ? "EN" : "RU";
+  startTyper();
+  startTerm();
+  drawTri();
 }
-$('#langBtn').addEventListener('click',()=>{
-  lang = lang==='ru' ? 'en' : 'ru';
-  try{ localStorage.setItem('rayan-lang',lang); }catch(e){}
+$("#langBtn").addEventListener("click", () => {
+  lang = lang === "ru" ? "en" : "ru";
+  try { localStorage.setItem("rayan-lang", lang); } catch (e) {}
   applyLang();
 });
 
-/* ================= hero morphing blob ================= */
-const blobOuter=$('#blobOuter'), blobInner=$('#blobInner');
-const N=12, CX=210, CY=210;
-const phases=Array.from({length:N},(_,i)=>i*(Math.PI*2/N));
-const pA=Array.from({length:N},()=>({x:0,y:0}));
-const pB=Array.from({length:N},()=>({x:0,y:0}));
-function smoothPath(pts){
-  const n=pts.length, mid=(a,b)=>({x:(a.x+b.x)/2,y:(a.y+b.y)/2});
-  const m0=mid(pts[0],pts[1]);
-  let d=`M ${m0.x.toFixed(1)} ${m0.y.toFixed(1)}`;
-  for(let i=1;i<=n;i++){
-    const p=pts[i%n], m=mid(p,pts[(i+1)%n]);
-    d+=` Q ${p.x.toFixed(1)} ${p.y.toFixed(1)} ${m.x.toFixed(1)} ${m.y.toFixed(1)}`;
-  }
-  return d+' Z';
+/* ---------- 02 preloader / progress / nav ---------- */
+function hidePre() {
+  const p = $(".pre");
+  if (!p || p.classList.contains("done")) return;
+  p.classList.add("done");
+  setTimeout(() => p.remove(), 650);
 }
-function morph(now){
-  const tt=now/1000;
-  for(let i=0;i<N;i++){
-    const a=phases[i];
-    const r1=150+38*Math.sin(tt*0.9+a*3)+10*Math.sin(tt*0.35+a*7);
-    pA[i].x=CX+r1*Math.cos(a); pA[i].y=CY+r1*Math.sin(a);
-    const ang=a+tt*0.12, r2=104+26*Math.sin(tt*1.35+a*2+1.7);
-    pB[i].x=CX+r2*Math.cos(ang); pB[i].y=CY+r2*Math.sin(ang);
+window.addEventListener("load", () => setTimeout(hidePre, 750));
+setTimeout(hidePre, 3200);
+
+const pbar = $("#pbar");
+const btt = $("#btt");
+const header = $(".topnav");
+function onScroll() {
+  const st = window.scrollY;
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  pbar.style.width = (h > 0 ? (st / h) * 100 : 0) + "%";
+  btt.classList.toggle("show", st > 700);
+  header.classList.toggle("scrolled", st > 30);
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+btt.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+const navLinks = {};
+$$(".topnav nav a").forEach(a => { navLinks[a.getAttribute("href").slice(1)] = a; });
+function initNav() {
+  const obs = new IntersectionObserver(es => {
+    es.forEach(en => {
+      if (!en.isIntersecting) return;
+      Object.values(navLinks).forEach(a => a.classList.remove("act"));
+      const a = navLinks[en.target.id];
+      if (a) a.classList.add("act");
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  ["about","stack","projects","playground","path","now","facts","contact"].forEach(id => {
+    const s = document.getElementById(id);
+    if (s) obs.observe(s);
+  });
+}
+
+/* ---------- 03 custom cursor ---------- */
+function initCursor() {
+  if (!window.matchMedia("(pointer: fine)").matches) return;
+  const dot = $("#curDot");
+  const ring = $("#curRing");
+  let mx = -100, my = -100, rx = -100, ry = -100;
+  document.addEventListener("mousemove", e => {
+    mx = e.clientX;
+    my = e.clientY;
+    dot.style.left = mx + "px";
+    dot.style.top = my + "px";
+  });
+  (function loop() {
+    rx += (mx - rx) * 0.16;
+    ry += (my - ry) * 0.16;
+    ring.style.left = rx + "px";
+    ring.style.top = ry + "px";
+    requestAnimationFrame(loop);
+  })();
+  document.addEventListener("mouseover", e => {
+    if (e.target.closest("a, button, input, .v, .acc-q")) ring.classList.add("big");
+  });
+  document.addEventListener("mouseout", e => {
+    if (e.target.closest("a, button, input, .v, .acc-q")) ring.classList.remove("big");
+  });
+}
+
+/* ---------- 04 particles background ---------- */
+const bgp = $("#bgp");
+const bctx = bgp.getContext("2d");
+let pts = [];
+const mouse = { x: -9999, y: -9999 };
+function bgSize() {
+  const dpr = window.devicePixelRatio || 1;
+  bgp.width = window.innerWidth * dpr;
+  bgp.height = window.innerHeight * dpr;
+  bctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const n = Math.min(90, Math.floor(window.innerWidth / 16));
+  pts = Array.from({ length: n }, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    vx: (Math.random() - 0.5) * 0.35,
+    vy: (Math.random() - 0.5) * 0.35,
+    r: Math.random() * 1.6 + 0.6
+  }));
+}
+function bgLoop() {
+  const w = window.innerWidth, h = window.innerHeight;
+  bctx.clearRect(0, 0, w, h);
+  for (const p of pts) {
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < 0 || p.x > w) p.vx *= -1;
+    if (p.y < 0 || p.y > h) p.vy *= -1;
+    const dxm = p.x - mouse.x, dym = p.y - mouse.y;
+    const dm = Math.hypot(dxm, dym);
+    if (dm < 140 && dm > 0.001) {
+      p.x += (dxm / dm) * 0.6;
+      p.y += (dym / dm) * 0.6;
+    }
+    bctx.beginPath();
+    bctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    bctx.fillStyle = "rgba(182,255,60,.5)";
+    bctx.fill();
   }
-  blobOuter.setAttribute('d',smoothPath(pA));
-  blobInner.setAttribute('d',smoothPath(pB));
+  for (let i = 0; i < pts.length; i++) {
+    for (let j = i + 1; j < pts.length; j++) {
+      const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+      const d = Math.hypot(dx, dy);
+      if (d < 120) {
+        bctx.beginPath();
+        bctx.moveTo(pts[i].x, pts[i].y);
+        bctx.lineTo(pts[j].x, pts[j].y);
+        bctx.strokeStyle = "rgba(182,255,60," + ((1 - d / 120) * 0.2).toFixed(3) + ")";
+        bctx.lineWidth = 1;
+        bctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(bgLoop);
+}
+document.addEventListener("mousemove", e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+/* ---------- 05 morphing hero shape ---------- */
+const blobOuter = $("#blobOuter");
+const blobMid = $("#blobMid");
+const blobInner = $("#blobInner");
+const NB = 12, BCX = 210, BCY = 210;
+const bphases = Array.from({ length: NB }, (_, i) => i * (Math.PI * 2 / NB));
+const bpA = Array.from({ length: NB }, () => ({ x: 0, y: 0 }));
+const bpB = Array.from({ length: NB }, () => ({ x: 0, y: 0 }));
+const bpC = Array.from({ length: NB }, () => ({ x: 0, y: 0 }));
+function smoothPath(pts) {
+  const n = pts.length;
+  const mid = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
+  const m0 = mid(pts[0], pts[1]);
+  let d = "M " + m0.x.toFixed(1) + " " + m0.y.toFixed(1);
+  for (let i = 1; i <= n; i++) {
+    const p = pts[i % n], m = mid(p, pts[(i + 1) % n]);
+    d += " Q " + p.x.toFixed(1) + " " + p.y.toFixed(1) + " " + m.x.toFixed(1) + " " + m.y.toFixed(1);
+  }
+  return d + " Z";
+}
+function morph(now) {
+  const tt = now / 1000;
+  for (let i = 0; i < NB; i++) {
+    const a = bphases[i];
+    const r1 = 150 + 38 * Math.sin(tt * 0.9 + a * 3) + 10 * Math.sin(tt * 0.35 + a * 7);
+    bpA[i].x = BCX + r1 * Math.cos(a);
+    bpA[i].y = BCY + r1 * Math.sin(a);
+    const ang2 = a - tt * 0.18;
+    const r2 = 118 + 30 * Math.sin(tt * 1.15 + a * 2 + 2.1);
+    bpB[i].x = BCX + r2 * Math.cos(ang2);
+    bpB[i].y = BCY + r2 * Math.sin(ang2);
+    const ang3 = a + tt * 0.25;
+    const r3 = 84 + 22 * Math.sin(tt * 1.5 + a * 4 + 0.6);
+    bpC[i].x = BCX + r3 * Math.cos(ang3);
+    bpC[i].y = BCY + r3 * Math.sin(ang3);
+  }
+  blobOuter.setAttribute("d", smoothPath(bpA));
+  blobMid.setAttribute("d", smoothPath(bpB));
+  blobInner.setAttribute("d", smoothPath(bpC));
   requestAnimationFrame(morph);
 }
 
-/* ================= glitch age (10..34) ================= */
-const ageEl=$('#ageGlitch');
-const junk=['??','##','<>','!!'];
-let freezeUntil=0;
-setInterval(()=>{
-  const now=Date.now();
-  if(now<freezeUntil) return;
-  const r=Math.random();
-  if(r<0.06){
-    freezeUntil=now+900+Math.random()*800;
-    ageEl.classList.add('freeze');
-    setTimeout(()=>ageEl.classList.remove('freeze'),1100);
-    return;
-  }
-  if(r<0.20){ ageEl.textContent=junk[Math.floor(Math.random()*junk.length)]; return; }
-  ageEl.textContent=String(Math.floor(Math.random()*25)+10); // 10..34
-},90);
+/* ---------- 06 glitch age ---------- */
+function initAge() {
+  const el = $("#ageGlitch");
+  const junk = ["??", "##", "<>", "!!"];
+  let freezeUntil = 0;
+  setInterval(() => {
+    const now = Date.now();
+    if (now < freezeUntil) return;
+    const r = Math.random();
+    if (r < 0.06) {
+      freezeUntil = now + 900 + Math.random() * 800;
+      el.classList.add("freeze");
+      setTimeout(() => el.classList.remove("freeze"), 1100);
+      return;
+    }
+    if (r < 0.2) {
+      el.textContent = junk[Math.floor(Math.random() * junk.length)];
+      return;
+    }
+    el.textContent = String(Math.floor(Math.random() * 25) + 10);
+  }, 90);
+}
 
-/* ================= drag vertices ================= */
-const dragSvg=$('#dragSvg');
-const P=[{x:96,y:74},{x:268,y:62},{x:216,y:206}];
-const cols=['#b6ff3c','#9ff0c8','#f2b8cf'];
-const lines=[...dragSvg.querySelectorAll('line.tri')];
-const dots=[...dragSvg.querySelectorAll('circle.v')];
-const tls=[...dragSvg.querySelectorAll('text.vl')];
-const roEls=[$('#roA'),$('#roB'),$('#roC')];
-dots.forEach((d,i)=>{ d.style.fill=cols[i]; tls[i].style.fill=cols[i]; });
-const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
-function toSvgPos(e){
-  const r=dragSvg.getBoundingClientRect();
+/* ---------- 07 typewriter ---------- */
+let tyTimer = null, tyI = 0, tyC = 0, tyDel = false;
+function startTyper() {
+  clearTimeout(tyTimer);
+  tyI = 0; tyC = 0; tyDel = false;
+  const el = $("#typer");
+  if (el) el.textContent = "";
+  tyTick();
+}
+function tyTick() {
+  const phr = DICT[lang].typer;
+  const el = $("#typer");
+  if (!el) return;
+  const cur = phr[tyI % phr.length];
+  if (!tyDel) {
+    tyC++;
+    el.textContent = cur.slice(0, tyC);
+    if (tyC >= cur.length) {
+      tyDel = true;
+      tyTimer = setTimeout(tyTick, 1700);
+      return;
+    }
+    tyTimer = setTimeout(tyTick, 55 + Math.random() * 40);
+  } else {
+    tyC--;
+    el.textContent = cur.slice(0, tyC);
+    if (tyC <= 0) {
+      tyDel = false;
+      tyI++;
+      tyTimer = setTimeout(tyTick, 320);
+      return;
+    }
+    tyTimer = setTimeout(tyTick, 26);
+  }
+}
+
+/* ---------- 08 reveal & counters & bars & rings ---------- */
+function countUp(el, target, dur) {
+  const duration = dur || 1300;
+  const t0 = performance.now();
+  function step(now) {
+    const p = Math.min(1, (now - t0) / duration);
+    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+function initReveal() {
+  const els = $$(".rv");
+  els.forEach(el => {
+    if (el.dataset.d) el.style.transitionDelay = el.dataset.d + "ms";
+    el.addEventListener("transitionend", () => { el.style.transitionDelay = "0ms"; }, { once: true });
+  });
+  const ob = new IntersectionObserver(es => {
+    es.forEach(en => {
+      if (!en.isIntersecting) return;
+      en.target.classList.add("in");
+      ob.unobserve(en.target);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -30px 0px" });
+  els.forEach(el => ob.observe(el));
+}
+function initCounters() {
+  const ob = new IntersectionObserver(es => {
+    es.forEach(en => {
+      if (!en.isIntersecting) return;
+      countUp(en.target, +en.target.dataset.count, 1400);
+      ob.unobserve(en.target);
+    });
+  }, { threshold: 0.5 });
+  $$(".cnt").forEach(el => ob.observe(el));
+}
+function initBars() {
+  const ob = new IntersectionObserver(es => {
+    es.forEach(en => {
+      if (!en.isIntersecting) return;
+      const b = en.target;
+      b.querySelector(".bar-fill").style.width = b.dataset.w + "%";
+      countUp(b.querySelector(".pct"), +b.dataset.w, 1200);
+      obs_un(b);
+    });
+    function obs_un(x) { ob.unobserve(x); }
+  }, { threshold: 0.4 });
+  $$(".bar").forEach(b => ob.observe(b));
+}
+function initRings() {
+  const ob = new IntersectionObserver(es => {
+    es.forEach(en => {
+      if (!en.isIntersecting) return;
+      const card = en.target;
+      const p = +card.dataset.p;
+      card.querySelector(".ring-fg").style.strokeDashoffset = (327 * (1 - p / 100)).toFixed(1);
+      countUp(card.querySelector(".rnum"), p, 1500);
+      ob.unobserve(card);
+    });
+  }, { threshold: 0.4 });
+  $$(".ring-card").forEach(c => ob.observe(c));
+}
+
+/* ---------- 09 drag vertices ---------- */
+const dragSvg = $("#dragSvg");
+const P = [{ x: 96, y: 74 }, { x: 268, y: 62 }, { x: 216, y: 206 }];
+const vcols = ["#b6ff3c", "#9ff0c8", "#f2b8cf"];
+const vlines = [...dragSvg.querySelectorAll("line.tri")];
+const vdots = [...dragSvg.querySelectorAll("circle.v")];
+const vtls = [...dragSvg.querySelectorAll("text.vl")];
+const roEls = [$("#roA"), $("#roB"), $("#roC")];
+vdots.forEach((d, i) => { d.style.fill = vcols[i]; vtls[i].style.fill = vcols[i]; });
+const vclamp = (v, min, max) => Math.min(max, Math.max(min, v));
+function toSvgPos(e) {
+  const r = dragSvg.getBoundingClientRect();
   return {
-    x:clamp((e.clientX-r.left)*(360/r.width),14,346),
-    y:clamp((e.clientY-r.top)*(260/r.height),14,246)
+    x: vclamp((e.clientX - r.left) * (360 / r.width), 14, 346),
+    y: vclamp((e.clientY - r.top) * (260 / r.height), 14, 246)
   };
 }
-let dragIdx=-1;
-dots.forEach((d,i)=>{
-  d.addEventListener('pointerdown',e=>{ dragIdx=i; try{d.setPointerCapture(e.pointerId);}catch(err){} e.preventDefault(); });
-  d.addEventListener('pointermove',e=>{ if(dragIdx!==i) return; const p=toSvgPos(e); P[i].x=p.x; P[i].y=p.y; drawTri(); });
-  d.addEventListener('pointerup',()=>{ dragIdx=-1; });
-  d.addEventListener('pointercancel',()=>{ dragIdx=-1; });
+let dragIdx = -1;
+vdots.forEach((d, i) => {
+  d.addEventListener("pointerdown", e => {
+    dragIdx = i;
+    try { d.setPointerCapture(e.pointerId); } catch (err) {}
+    e.preventDefault();
+  });
+  d.addEventListener("pointermove", e => {
+    if (dragIdx !== i) return;
+    const p = toSvgPos(e);
+    P[i].x = p.x;
+    P[i].y = p.y;
+    drawTri();
+  });
+  d.addEventListener("pointerup", () => { dragIdx = -1; });
+  d.addEventListener("pointercancel", () => { dragIdx = -1; });
 });
-const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
-function drawTri(){
-  for(let i=0;i<3;i++){
-    const a=P[i], b=P[(i+1)%3];
-    lines[i].setAttribute('x1',a.x); lines[i].setAttribute('y1',a.y);
-    lines[i].setAttribute('x2',b.x); lines[i].setAttribute('y2',b.y);
-    dots[i].setAttribute('cx',a.x); dots[i].setAttribute('cy',a.y);
-    tls[i].setAttribute('x',a.x+16); tls[i].setAttribute('y',a.y-12);
+const vdist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+function drawTri() {
+  for (let i = 0; i < 3; i++) {
+    const a = P[i], b = P[(i + 1) % 3];
+    vlines[i].setAttribute("x1", a.x);
+    vlines[i].setAttribute("y1", a.y);
+    vlines[i].setAttribute("x2", b.x);
+    vlines[i].setAttribute("y2", b.y);
+    vdots[i].setAttribute("cx", a.x);
+    vdots[i].setAttribute("cy", a.y);
+    vtls[i].setAttribute("x", a.x + 16);
+    vtls[i].setAttribute("y", a.y - 12);
   }
-  roEls.forEach((el,i)=>{ el.textContent=`${'ABC'[i]} (${Math.round(P[i].x)}, ${Math.round(P[i].y)})`; });
-  const A=Math.abs((P[1].x-P[0].x)*(P[2].y-P[0].y)-(P[2].x-P[0].x)*(P[1].y-P[0].y))/2;
-  const per=dist(P[0],P[1])+dist(P[1],P[2])+dist(P[2],P[0]);
-  $('#roArea').textContent=Math.round(A)+' '+t('ro_px2');
-  $('#roPerim').textContent=Math.round(per)+' '+t('ro_px');
+  roEls.forEach((el, i) => {
+    el.textContent = "ABC"[i] + " (" + Math.round(P[i].x) + ", " + Math.round(P[i].y) + ")";
+  });
+  const A = Math.abs((P[1].x - P[0].x) * (P[2].y - P[0].y) - (P[2].x - P[0].x) * (P[1].y - P[0].y)) / 2;
+  const per = vdist(P[0], P[1]) + vdist(P[1], P[2]) + vdist(P[2], P[0]);
+  $("#roArea").textContent = Math.round(A) + " " + t("ro_px2");
+  $("#roPerim").textContent = Math.round(per) + " " + t("ro_px");
 }
 
-/* ================= slider wave ================= */
-const wc=$('#waveCanvas'), wctx=wc.getContext('2d');
-let amp=42, freq=3, spd=1.0, ph=0, lastT=performance.now();
-function sizeWave(){
-  const box=wc.parentElement, dpr=window.devicePixelRatio||1, w=Math.max(200,box.clientWidth-8);
-  wc.width=Math.round(w*dpr); wc.height=Math.round(220*dpr);
-  wc.style.width=w+'px'; wc.style.height='220px';
-  wctx.setTransform(dpr,0,0,dpr,0,0);
+/* ---------- 10 slider wave ---------- */
+const wc = $("#waveCanvas");
+const wctx = wc.getContext("2d");
+let amp = 42, freq = 3, spd = 1.0, ph = 0, lastT = performance.now();
+function sizeWave() {
+  const box = wc.parentElement;
+  const dpr = window.devicePixelRatio || 1;
+  const w = Math.max(200, box.clientWidth - 8);
+  wc.width = Math.round(w * dpr);
+  wc.height = Math.round(220 * dpr);
+  wc.style.width = w + "px";
+  wc.style.height = "220px";
+  wctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
-function waveRead(){
-  $('#vAmp').textContent=amp;
-  $('#vFreq').textContent=freq;
-  $('#vSpd').textContent=spd.toFixed(1);
-  $('#waveEq').textContent=`y = ${amp} \u00b7 sin( ${freq}\u00b7x + t\u00b7${spd.toFixed(1)} )`;
+function waveRead() {
+  $("#vAmp").textContent = amp;
+  $("#vFreq").textContent = freq;
+  $("#vSpd").textContent = spd.toFixed(1);
+  $("#waveEq").textContent = "y = " + amp + " · sin( " + freq + "·x + t·" + spd.toFixed(1) + " )";
 }
-$('#sAmp').addEventListener('input',e=>{ amp=+e.target.value; waveRead(); });
-$('#sFreq').addEventListener('input',e=>{ freq=+e.target.value; waveRead(); });
-$('#sSpd').addEventListener('input',e=>{ spd=+e.target.value; waveRead(); });
-function drawWave(now){
-  const dt=Math.min(0.05,(now-lastT)/1000); lastT=now; ph+=dt*spd;
-  const w=wc.clientWidth||300, h=220, mid=h/2;
-  wctx.clearRect(0,0,w,h);
-  wctx.strokeStyle='rgba(255,255,255,0.05)'; wctx.lineWidth=1;
-  for(let x=0;x<w;x+=40){ wctx.beginPath(); wctx.moveTo(x,0); wctx.lineTo(x,h); wctx.stroke(); }
-  for(let y=0;y<h;y+=40){ wctx.beginPath(); wctx.moveTo(0,y); wctx.lineTo(w,y); wctx.stroke(); }
-  wctx.strokeStyle='rgba(255,255,255,0.16)'; wctx.beginPath(); wctx.moveTo(0,mid); wctx.lineTo(w,mid); wctx.stroke();
-  wctx.beginPath();
-  for(let x=0;x<=w;x+=2){
-    const y=mid-amp*0.5*Math.sin((x/46)*freq*1.5+ph*0.8+1.1);
-    if(x===0){wctx.moveTo(x,y);}else{wctx.lineTo(x,y);}
+$("#sAmp").addEventListener("input", e => { amp = +e.target.value; waveRead(); });
+$("#sFreq").addEventListener("input", e => { freq = +e.target.value; waveRead(); });
+$("#sSpd").addEventListener("input", e => { spd = +e.target.value; waveRead(); });
+function drawWave(now) {
+  const dt = Math.min(0.05, (now - lastT) / 1000);
+  lastT = now;
+  ph += dt * spd;
+  const w = wc.clientWidth || 300, h = 220, mid = h / 2;
+  wctx.clearRect(0, 0, w, h);
+  wctx.strokeStyle = "rgba(255,255,255,0.05)";
+  wctx.lineWidth = 1;
+  for (let x = 0; x < w; x += 40) {
+    wctx.beginPath();
+    wctx.moveTo(x, 0);
+    wctx.lineTo(x, h);
+    wctx.stroke();
   }
-  wctx.strokeStyle='rgba(242,184,207,0.5)'; wctx.lineWidth=1.5; wctx.stroke();
-  const g=wctx.createLinearGradient(0,0,w,0);
-  g.addColorStop(0,'#9ff0c8'); g.addColorStop(1,'#b6ff3c');
-  wctx.beginPath();
-  for(let x=0;x<=w;x+=2){
-    const y=mid-amp*Math.sin((x/46)*freq+ph);
-    if(x===0){wctx.moveTo(x,y);}else{wctx.lineTo(x,y);}
+  for (let y = 0; y < h; y += 40) {
+    wctx.beginPath();
+    wctx.moveTo(0, y);
+    wctx.lineTo(w, y);
+    wctx.stroke();
   }
-  wctx.strokeStyle=g; wctx.lineWidth=2.5; wctx.stroke();
+  wctx.strokeStyle = "rgba(255,255,255,0.16)";
+  wctx.beginPath();
+  wctx.moveTo(0, mid);
+  wctx.lineTo(w, mid);
+  wctx.stroke();
+  wctx.beginPath();
+  for (let x = 0; x <= w; x += 2) {
+    const y = mid - amp * 0.5 * Math.sin((x / 46) * freq * 1.5 + ph * 0.8 + 1.1);
+    if (x === 0) { wctx.moveTo(x, y); } else { wctx.lineTo(x, y); }
+  }
+  wctx.strokeStyle = "rgba(242,184,207,0.5)";
+  wctx.lineWidth = 1.5;
+  wctx.stroke();
+  const g = wctx.createLinearGradient(0, 0, w, 0);
+  g.addColorStop(0, "#9ff0c8");
+  g.addColorStop(1, "#b6ff3c");
+  wctx.beginPath();
+  for (let x = 0; x <= w; x += 2) {
+    const y = mid - amp * Math.sin((x / 46) * freq + ph);
+    if (x === 0) { wctx.moveTo(x, y); } else { wctx.lineTo(x, y); }
+  }
+  wctx.strokeStyle = g;
+  wctx.lineWidth = 2.5;
+  wctx.stroke();
   requestAnimationFrame(drawWave);
 }
 
-/* ================= quiz ================= */
-let quizState=[null,null,null,null];
-const score=()=> DICT[lang].quiz_qs.reduce((s,q,i)=> s + (quizState[i]===q.a?1:0), 0);
-function renderQuiz(){
-  const qs=DICT[lang].quiz_qs, wrap=$('#quizCards');
-  wrap.innerHTML='';
-  qs.forEach((q,qi)=>{
-    const card=document.createElement('div');
-    card.className='qcard'+(quizState[qi]!==null?' locked':'');
-    const h=document.createElement('h3'); h.textContent=q.q; card.appendChild(h);
-    const owrap=document.createElement('div'); owrap.className='opts';
-    q.opts.forEach((o,oi)=>{
-      const b=document.createElement('button');
-      b.type='button'; b.className='opt'; b.textContent=o;
-      if(quizState[qi]!==null){
-        if(oi===q.a) b.classList.add('is-correct');
-        if(oi===quizState[qi] && quizState[qi]!==q.a) b.classList.add('is-wrong');
+/* ---------- 11 projects: filters / tilt ---------- */
+function initFilters() {
+  const btns = $$(".fbtn");
+  const cards = $$(".pcard");
+  btns.forEach(b => b.addEventListener("click", () => {
+    btns.forEach(x => x.classList.remove("on"));
+    b.classList.add("on");
+    const f = b.dataset.f;
+    cards.forEach(c => {
+      const show = f === "all" || c.dataset.lang === f;
+      c.classList.toggle("hide", !show);
+      if (show) {
+        c.classList.remove("pop");
+        void c.offsetWidth;
+        c.classList.add("pop");
       }
-      b.addEventListener('click',()=>answer(qi,oi));
-      owrap.appendChild(b);
     });
-    card.appendChild(owrap); wrap.appendChild(card);
+  }));
+}
+function initTilt() {
+  if (!window.matchMedia("(pointer: fine)").matches) return;
+  $$(".pcard").forEach(card => {
+    card.addEventListener("mousemove", e => {
+      const r = card.getBoundingClientRect();
+      const rx = ((e.clientY - r.top) / r.height - 0.5) * -7;
+      const ry = ((e.clientX - r.left) / r.width - 0.5) * 7;
+      card.style.transform = "perspective(700px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg)";
+    });
+    card.addEventListener("mouseleave", () => { card.style.transform = ""; });
   });
-  updateScore();
-}
-function answer(qi,oi){
-  if(quizState[qi]!==null) return;
-  quizState[qi]=oi;
-  const good=oi===DICT[lang].quiz_qs[qi].a;
-  renderQuiz();
-  const card=$('#quizCards').children[qi];
-  card.classList.add(good?'pulse-good':'pulse-bad');
-}
-function updateScore(){
-  const qs=DICT[lang].quiz_qs;
-  $('#quizScore').textContent=`${t('quiz_score')}: ${score()} / ${qs.length}`;
-  $('#quizDone').hidden=!quizState.every(v=>v!==null);
 }
 
-/* ================= path (step by step) ================= */
-let pathState=0;
-const pathList=$('#pathList');
-function makeStep(i,animate){
-  const s=DICT[lang].path_steps[i];
-  const li=document.createElement('div');
-  li.className='step'+(animate?'':' show');
-  const num=document.createElement('div'); num.className='step-num'; num.textContent=String(i+1).padStart(2,'0');
-  const box=document.createElement('div');
-  const h=document.createElement('h4'); h.textContent=s.t;
-  const p=document.createElement('p'); p.textContent=s.d;
-  box.appendChild(h); box.appendChild(p);
-  li.appendChild(num); li.appendChild(box);
-  return li;
+/* ---------- 12 magnetic buttons & ripple ---------- */
+function initMag() {
+  if (!window.matchMedia("(pointer: fine)").matches) return;
+  $$(".mag").forEach(b => {
+    b.addEventListener("mousemove", e => {
+      const r = b.getBoundingClientRect();
+      const dx = (e.clientX - r.left - r.width / 2) * 0.18;
+      const dy = (e.clientY - r.top - r.height / 2) * 0.18;
+      b.style.transform = "translate(" + dx.toFixed(1) + "px," + dy.toFixed(1) + "px)";
+    });
+    b.addEventListener("mouseleave", () => { b.style.transform = ""; });
+  });
 }
-function renderPath(){
-  pathList.innerHTML='';
-  for(let i=0;i<pathState;i++) pathList.appendChild(makeStep(i,false));
-  updatePathUI();
+function initRipple() {
+  document.addEventListener("click", e => {
+    const b = e.target.closest(".btn, .fbtn");
+    if (!b) return;
+    const r = b.getBoundingClientRect();
+    const s = document.createElement("span");
+    s.className = "ripple";
+    const d = Math.max(r.width, r.height) * 1.2;
+    s.style.width = s.style.height = d + "px";
+    s.style.left = (e.clientX - r.left - d / 2) + "px";
+    s.style.top = (e.clientY - r.top - d / 2) + "px";
+    b.appendChild(s);
+    setTimeout(() => s.remove(), 650);
+  });
 }
-function updatePathUI(){
-  const total=DICT[lang].path_steps.length;
-  const btn=$('#pathBtn');
-  btn.textContent = pathState>=total ? t('path_done') : t('path_next');
-  btn.disabled = pathState>=total;
-  $('#pathReset').textContent=t('path_reset');
-  $('#pathDots').textContent=DICT[lang].path_steps.map((_,i)=>i<pathState?'\u25cf':'\u25cb').join(' ');
+
+/* ---------- 13 facts accordion ---------- */
+function initAccordion() {
+  $$(".acc-item").forEach(item => {
+    const q = item.querySelector(".acc-q");
+    const a = item.querySelector(".acc-a");
+    q.addEventListener("click", () => {
+      const wasOpen = item.classList.contains("open");
+      $$(".acc-item.open").forEach(o => {
+        o.classList.remove("open");
+        o.querySelector(".acc-a").style.maxHeight = null;
+      });
+      if (!wasOpen) {
+        item.classList.add("open");
+        a.style.maxHeight = a.scrollHeight + "px";
+      }
+    });
+  });
+  window.addEventListener("resize", () => {
+    $$(".acc-item.open .acc-a").forEach(a => { a.style.maxHeight = a.scrollHeight + "px"; });
+  });
 }
-$('#pathBtn').addEventListener('click',()=>{
-  const total=DICT[lang].path_steps.length;
-  if(pathState>=total) return;
-  const li=makeStep(pathState,true);
-  pathList.appendChild(li);
-  pathState++;
-  requestAnimationFrame(()=>requestAnimationFrame(()=>li.classList.add('show')));
-  updatePathUI();
+
+/* ---------- 14 terminal typing ---------- */nlet termRun = 0;
+function startTerm() {
+  termRun++;
+  const my = termRun;
+  const body = $("#termBody");
+  if (!body) return;
+  body.innerHTML = "";
+  const lines = DICT[lang].term;
+  let li = 0;
+  function nextLine() {
+    if (my !== termRun) return;
+    if (li >= lines.length) {
+      setTimeout(() => { if (my === termRun) startTerm(); }, 3800);
+      return;
+    }
+    const raw = lines[li];
+    const isCmd = raw.startsWith("$");
+    const div = document.createElement("div");
+    div.className = isCmd ? "cmd typing" : "out typing";
+    body.appendChild(div);
+    const text = isCmd ? raw.slice(2) : raw;
+    let ci = 0;
+    function tick() {
+      if (my !== termRun) return;
+      if (ci <= text.length) {
+        div.textContent = (isCmd ? "$ " : "") + text.slice(0, ci);
+        ci++;
+        setTimeout(tick, isCmd ? 34 : 16);
+      } else {
+        div.classList.remove("typing");
+        li++;
+        setTimeout(nextLine, isCmd ? 280 : 150);
+      }
+    }
+    tick();
+  }
+  nextLine();
+}
+
+/* ---------- 15 matrix mode ---------- */nconst mxCanvas = $("#mx");
+const mctx = mxCanvas.getContext("2d");
+let mxOn = false, mxW = 0, mxH = 0, mxCols = [];
+const mxChars = "アカサタナハマヤラワンイキシチニヒミリヌ0123456789ABCDEF<>{}[]/*+-";
+function mxSize() {
+  mxW = mxCanvas.width = window.innerWidth;
+  mxH = mxCanvas.height = window.innerHeight;
+  const fs = 16;
+  const n = Math.ceil(mxW / fs);
+  mxCols = Array.from({ length: n }, () => Math.random() * mxH / fs);
+}
+function mxDraw() {
+  if (!mxOn) return;
+  mctx.globalCompositeOperation = "destination-out";
+  mctx.fillStyle = "rgba(0,0,0,.08)";
+  mctx.fillRect(0, 0, mxW, mxH);
+  mctx.globalCompositeOperation = "source-over";
+  mctx.fillStyle = "#b6ff3c";
+  mctx.font = "14px monospace";
+  const fs = 16;
+  mxCols.forEach((y, i) => {
+    const ch = mxChars[Math.floor(Math.random() * mxChars.length)];
+    mctx.globalAlpha = 0.35 + Math.random() * 0.65;
+    mctx.fillText(ch, i * fs, y * fs);
+    mxCols[i] = (y * fs > mxH && Math.random() > 0.975) ? 0 : y + 1;
+  });
+  mctx.globalAlpha = 1;
+  requestAnimationFrame(mxDraw);
+}
+function toggleMx() {
+  document.body.classList.toggle("mx");
+  mxOn = document.body.classList.contains("mx");
+  $("#mxBtn").classList.toggle("on", mxOn);
+  if (mxOn) {
+    mxSize();
+    requestAnimationFrame(mxDraw);
+  } else {
+    mctx.clearRect(0, 0, mxW, mxH);
+  }
+}
+$("#mxBtn").addEventListener("click", toggleMx);
+let konamiBuf = [];
+const konamiSeq = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
+window.addEventListener("keydown", e => {
+  const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+  konamiBuf.push(k);
+  konamiBuf = konamiBuf.slice(-10);
+  if (konamiBuf.join(",") === konamiSeq.join(",")) toggleMx();
 });
-$('#pathReset').addEventListener('click',()=>{ pathState=0; renderPath(); });
-
-/* ================= copy handle ================= */
-$('#copyTg').addEventListener('click',async()=>{
-  try{ await navigator.clipboard.writeText('@traxx05'); }catch(e){}
-  const b=$('#copyTg');
-  b.textContent=t('copied');
-  setTimeout(()=>{ b.textContent=t('copy'); },1500);
+let logoClicks = 0;
+$(".logo").addEventListener("click", () => {
+  if (++logoClicks >= 5) {
+    logoClicks = 0;
+    toggleMx();
+  }
 });
 
-/* ================= init ================= */
+/* ---------- 16 misc ---------- */nfunction initMisc() {
+  const yr = $("#yr");
+  if (yr) yr.textContent = new Date().getFullYear();
+  const copyBtn = $("#copyTg");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText("@traxx05"); } catch (e) {}
+      copyBtn.textContent = t("copied");
+      setTimeout(() => { copyBtn.textContent = t("copy"); }, 1500);
+    });
+  }
+  const nameEl = $("#heroName");
+  setInterval(() => {
+    if (Math.random() < 0.5) {
+      nameEl.classList.add("gl");
+      setTimeout(() => nameEl.classList.remove("gl"), 480);
+    }
+  }, 3800);
+  window.addEventListener("resize", () => {
+    sizeWave();
+    bgSize();
+    if (mxOn) mxSize();
+  });
+}
+
+/* ---------- init sequence ---------- */
+initNav();
+initCursor();
+initAge();
+initReveal();
+initCounters();
+initBars();
+initRings();
+initFilters();
+initTilt();
+initMag();
+initRipple();
+initAccordion();
+initMisc();
 applyLang();
 drawTri();
 sizeWave();
 waveRead();
+bgSize();
 requestAnimationFrame(drawWave);
 requestAnimationFrame(morph);
-window.addEventListener('resize',sizeWave);
+requestAnimationFrame(bgLoop);
+onScroll();
 })();
 </script>
 </body>
